@@ -29,11 +29,13 @@ Evidence:
 Repeating the question and hint, and generating the SQL with Recursive Divide-and-Conquer.
 '''
 
+base_dir = os.getcwd()
+
 def load_kv_cache(pu_name: str):
     if pu_name in ['CG_a', 'CG_b']:
-        cache_dir = '/home/s2/wurikiji/CHESS/chess_pu/agent_template/cache_8b/'
+        cache_dir = f'{base_dir}/chess_pu/agent_template/cache_8b/'
     else:
-        cache_dir = '/home/s2/wurikiji/CHESS/chess_pu/db_schema/cache_8b/'
+        cache_dir = f'{base_dir}/chess_pu/db_schema/cache_8b/'
     in_file = os.path.join(cache_dir, f"{pu_name}.pt")
     
     return torch.load(in_file, weights_only=True, map_location="cuda")
@@ -64,13 +66,13 @@ def load_prompt(pu_list: List[str]):
     prompt = ""
     for pu_name in pu_list:
         if pu_name in ['CG_a', 'CG_b']:
-            cache_dir = '/home/s2/wurikiji/CHESS/chess_pu/agent_template/'
+            cache_dir = f'{base_dir}/chess_pu/agent_template/'
             in_file = os.path.join(cache_dir, f"{pu_name}.txt")
             with open(in_file, 'r', encoding='utf-8') as f:
                 content = f.read()
                 content = content + '\n'
         else:
-            cache_dir = '/home/s2/wurikiji/CHESS/chess_pu/db_schema/'
+            cache_dir = f'{base_dir}/chess_pu/db_schema/'
             in_file = os.path.join(cache_dir, f"{pu_name}.txt")
             with open(in_file, 'r', encoding='utf-8') as f:
                 content = f.read()
@@ -82,7 +84,7 @@ def load_prompt(pu_list: List[str]):
 _LLAMA_MODEL = None
 _LLAMA_TOKENIZER = None
 
-def _init_llama_once(model_name="meta-llama/llama-3.1-8B"):
+def _init_llama_once(model_name="meta-llama/Llama-3.1-8B"):
 # def _init_llama_once(model_name="meta-llama/Meta-Llama-3-8B"):
     global _LLAMA_MODEL, _LLAMA_TOKENIZER
     if _LLAMA_MODEL is None:
