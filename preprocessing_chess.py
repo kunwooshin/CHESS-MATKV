@@ -80,9 +80,9 @@ class DocumentPreprocessor():
       input = self.tokenizer(template, return_tensors="pt", padding_side="left", add_special_tokens=False).to("cuda")
       
     with torch.no_grad():
-      output = self.model(**input, use_cache = True)
-
-    cache = output.past_key_values.to_legacy_cache()
+      output = self.model(**input, use_cache = True, return_legacy_cache=True)
+    cache = output.past_key_values
+      
     torch.save(cache, output_file)
     '''
       cache = torch.load(os.path.join(self.cache_dir, f"{chunk.id}.pt"))
@@ -93,9 +93,12 @@ class DocumentPreprocessor():
   def save_kv_cache_aio(self, template: str, pu_name:str):
     output_file = os.path.join(self.cache_dir, f"{pu_name}.pt")
     input = self.tokenizer(template, return_tensors="pt", padding_side="left").to("cuda")
+    # with torch.no_grad():
+    #   output = self.model(**input, use_cache = True)
+    # cache = output.past_key_values.to_legacy_cache()
     with torch.no_grad():
-      output = self.model(**input, use_cache = True)
-    cache = output.past_key_values.to_legacy_cache()
+      output = self.model(**input, use_cache = True, return_legacy_cache=True)
+    cache = output.past_key_values
 
     cache_tensors = [t.flatten() for layer in cache for t in layer]  # 하나의 1D 텐서로 변환; .pin_memory()하려면 cpu로 보내야함?
     cache_tensor = torch.cat(cache_tensors)
