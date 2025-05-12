@@ -1,4 +1,5 @@
-# Define variables
+#!/bin/bash
+
 source .env
 db_root_directory=$DB_ROOT_DIRECTORY # UPDATE THIS WITH THE PATH TO THE PARENT DIRECTORY OF THE DATABASES
 db_id="all" # Options: all or a specific db_id
