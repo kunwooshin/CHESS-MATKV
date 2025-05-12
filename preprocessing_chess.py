@@ -58,7 +58,7 @@ class DocumentPreprocessor():
   def process_documents(self):
     start_time = time.time()
     for docs_dir, cache_dir in zip(self.docs_dirs, self.cache_dirs):
-      files = [f for f in os.listdir(docs_dir) if not f.startswith("cache")]
+      files = [f for f in os.listdir(self.docs_dir) if not f.startswith("cache") and f != ".ipynb_checkpoints"]
       print(f"Processing {len(files)} documents from {docs_dir}...")
 
       for filename in tqdm(files):
