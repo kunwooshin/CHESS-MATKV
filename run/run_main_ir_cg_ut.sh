@@ -1,3 +1,5 @@
+#!/bin/bash
+
 source .env
 data_mode=$DATA_MODE # Options: 'dev', 'train' 
 data_path=$DATA_PATH # UPDATE THIS WITH THE PATH TO THE TARGET DATASET
