@@ -1,0 +1,118 @@
+【Table creation statements】
+CREATE TABLE tags
+(
+	TagName TEXT null, -- Example Values: `('bayesian',)`, `('prior',)`, `('elicitation',)` | Value Statics: Total count 1032 - Distinct count 1032 - Null count 0   
+	WikiPostId INTEGER null, -- Example Values: `(20257,)`, `(62157,)`, `(67814,)` | Value Statics: Total count 596 - Distinct count 596 - Null count 436   
+	ExcerptPostId INTEGER null, -- Example Values: `(20258,)`, `(62158,)`, `(67815,)` | Value Statics: Total count 596 - Distinct count 596 - Null count 436   
+	Id INTEGER not null primary key,
+	foreign key (ExcerptPostId) references posts (Id) on update cascade on delete cascade,
+	Count INTEGER null, -- Example Values: `(1342,)`, `(168,)`, `(6,)` | Value Statics: Total count 1032 - Distinct count 272 - Null count 0  | Column Description: the count of posts that contain this tag | Value Description: more counts --> this tag is more popular
+);
+
+CREATE TABLE postHistory
+(
+	UserId INTEGER null, -- Example Values: `(8,)`, `(24,)`, `(18,)` | Value Statics: Total count 91256 - Distinct count 6152 - Null count 8744 | Column Name Meaning: User Id | Column Description: the user who post the post 
+	UserDisplayName TEXT null, -- Example Values: `('',)`, `('user28',)`, `('user209',)` | Value Statics: Total count 100000 - Distinct count 719 - Null count 0 | Column Name Meaning: User Display Name | Column Description: user's display name 
+	CreationDate DATETIME null, -- Example Values: `('2010-07-19 19:12:12.0',)`, `('2010-07-19 19:12:57.0',)`, `('2010-07-19 19:13:28.0',)` | Value Statics: Total count 100000 - Distinct count 66375 - Null count 0   
+	foreign key (PostId) references posts (Id) on update cascade on delete cascade,
+	PostHistoryTypeId INTEGER null, -- Example Values: `(2,)`, `(1,)`, `(3,)` | Value Statics: Total count 100000 - Distinct count 25 - Null count 0   
+	Comment TEXT null, -- Example Values: `('',)`, `('edited tags',)`, `('add content from the comments;',)` | Value Statics: Total count 100000 - Distinct count 17113 - Null count 0   
+	foreign key (UserId) references users (Id) on update cascade on delete cascade,
+	PostId INTEGER null, -- Example Values: `(1,)`, `(2,)`, `(3,)` | Value Statics: Total count 100000 - Distinct count 32120 - Null count 0   
+	Text TEXT null, --  
+	RevisionGUID TEXT null, -- Example Values: `('e58bf7fd-e60f-4c58-a6e4-dfc91cf98a69',)`, `('18bf9150-f1cb-432d-b7b7-26d2f8e33581',)`, `('6320bb0f-c792-4a8c-8083-89507c28d375',)` | Value Statics: Total count 100000 - Distinct count 67798 - Null count 0   
+	Id INTEGER not null UNIQUE primary key,
+);
+
+CREATE TABLE postLinks
+(
+	foreign key (RelatedPostId) references posts (Id) on update cascade on delete cascade,
+	foreign key (PostId) references posts (Id) on update cascade on delete cascade,
+	Id INTEGER not null primary key,
+	CreationDate DATETIME null, -- Example Values: `('2010-07-21 14:47:33.0',)`, `('2010-07-23 16:30:41.0',)`, `('2010-07-26 20:12:15.0',)` | Value Statics: Total count 11102 - Distinct count 9450 - Null count 0   
+	RelatedPostId INTEGER null, -- Example Values: `(173,)`, `(539,)`, `(30,)` | Value Statics: Total count 11102 - Distinct count 5177 - Null count 0   
+	PostId INTEGER null, -- Example Values: `(395,)`, `(548,)`, `(375,)` | Value Statics: Total count 11102 - Distinct count 7604 - Null count 0   
+	LinkTypeId INTEGER null, -- Example Values: `1`, `3` | Value Statics: Total count 11102 - Distinct count 2 - Null count 0   
+);
+
+CREATE TABLE users
+(
+	DownVotes INTEGER null, -- Example Values: `(1920,)`, `(0,)`, `(5,)` | Value Statics: Total count 40325 - Distinct count 76 - Null count 0   
+	Reputation INTEGER null, -- Example Values: `(1,)`, `(101,)`, `(6792,)` | Value Statics: Total count 40325 - Distinct count 965 - Null count 0   
+	Views INTEGER null, -- Example Values: `(0,)`, `(25,)`, `(22,)` | Value Statics: Total count 40325 - Distinct count 362 - Null count 0   
+	UpVotes INTEGER null, -- Example Values: `(5007,)`, `(3,)`, `(19,)` | Value Statics: Total count 40325 - Distinct count 332 - Null count 0   
+	Location TEXT null, -- Example Values: `('on the server farm',)`, `('Corvallis, OR',)`, `('New York, NY',)` | Value Statics: Total count 11691 - Distinct count 2464 - Null count 28634   
+	AccountId INTEGER null, -- Example Values: `(-1,)`, `(2,)`, `(3,)` | Value Statics: Total count 40325 - Distinct count 40325 - Null count 0   
+	ProfileImageUrl TEXT null, -- Example Values: `('http://i.stack.imgur.com/d1oHX.jpg',)`, `('http://i.stack.imgur.com/km1pr.jpg',)`, `('http://i.stack.imgur.com/wSfuj.png',)` | Value Statics: Total count 16479 - Distinct count 13115 - Null count 23846   
+	AboutMe TEXT null, --  
+	Age INTEGER null, -- Example Values: `(37,)`, `(35,)`, `(28,)` | Value Statics: Total count 8318 - Distinct count 70 - Null count 32007   
+	LastAccessDate DATETIME null, -- Example Values: `('2010-07-19 06:55:26.0',)`, `('2013-11-12 22:07:23.0',)`, `('2014-08-08 06:42:58.0',)` | Value Statics: Total count 40325 - Distinct count 40287 - Null count 0   
+	CreationDate DATETIME null, -- Example Values: `('2010-07-19 06:55:26.0',)`, `('2010-07-19 14:01:36.0',)`, `('2010-07-19 15:34:50.0',)` | Value Statics: Total count 40325 - Distinct count 40315 - Null count 0   
+	WebsiteUrl TEXT null, -- Example Values: `('http://meta.stackexchange.com/',)`, `('http://stackoverflow.com',)`, `('http://minesweeperonline.com',)` | Value Statics: Total count 8121 - Distinct count 7787 - Null count 32204   
+	Id INTEGER not null UNIQUE primary key,
+	DisplayName TEXT null, -- Example Values: `user`, `csgillespie` | Value Statics: Total count 40325 - Distinct count 35644 - Null count 0 | Column Name Meaning: Display Name | Column Description: the user's display name 
+);
+
+CREATE TABLE badges
+(
+	Name TEXT null, -- Example Values: `('Teacher',)`, `('Student',)`, `('Editor',)` | Value Statics: Total count 79851 - Distinct count 153 - Null count 0   
+	UserId INTEGER null, -- Example Values: `(5,)`, `(6,)`, `(8,)` | Value Statics: Total count 79851 - Distinct count 25078 - Null count 0   
+	Id INTEGER not null primary key,
+	Date DATETIME null, -- Example Values: `('2010-07-19 19:39:07.0',)`, `('2010-07-19 19:39:08.0',)`, `('2010-07-19 19:39:09.0',)` | Value Statics: Total count 79851 - Distinct count 65586 - Null count 0   
+	foreign key (UserId) references users (Id) on update cascade on delete cascade,
+);
+
+CREATE TABLE posts
+(
+	Title TEXT null, -- Example Values: `('Eliciting priors from experts',)`, `('What is normality?',)`, `('What are some valuable Statistical Analysis open source projects?',)` | Value Statics: Total count 42912 - Distinct count 42877 - Null count 49054  | Column Description: the title of the post 
+	foreign key (OwnerUserId) references users (Id) on update cascade on delete cascade,
+	Score INTEGER null, -- Example Values: `(23,)`, `(22,)`, `(54,)` | Value Statics: Total count 91966 - Distinct count 130 - Null count 0   
+	CreaionDate DATETIME null, -- Example Values: `('2010-07-19 19:12:12.0',)`, `('2010-07-19 19:12:57.0',)`, `('2010-07-19 19:13:28.0',)` | Value Statics: Total count 91966 - Distinct count 91255 - Null count 0   
+	OwnerDisplayName TEXT null, -- Example Values: `('user28',)`, `('user209',)`, `('Michael Bishop',)` | Value Statics: Total count 2509 - Distinct count 1613 - Null count 89457 | Column Name Meaning: Owner Display Name | Column Description: the display name of the post owner 
+	foreign key (ParentId) references posts (Id) on update cascade on delete cascade,
+	Body TEXT null, --  
+	Id INTEGER not null UNIQUE primary key,
+	ViewCount INTEGER null, -- Example Values: `(1278,)`, `(8198,)`, `(3613,)` | Value Statics: Total count 42912 - Distinct count 3714 - Null count 49054   
+	LastEditorDisplayName TEXT null, -- Example Values: `('user28',)`, `('user10525',)`, `('sjcockell',)` | Value Statics: Total count 465 - Distinct count 59 - Null count 91501   
+	LasActivityDate DATETIME null, -- Example Values: `('2010-09-15 21:08:26.0',)`, `('2012-11-12 09:21:54.0',)`, `('2013-05-27 14:48:36.0',)` | Value Statics: Total count 91966 - Distinct count 72647 - Null count 0   
+	ParentId INTEGER null, -- Example Values: `(3,)`, `(7,)`, `(6,)` | Value Statics: Total count 47755 - Distinct count 29006 - Null count 44211   
+	AnswerCount INTEGER null, -- Example Values: `(5,)`, `(7,)`, `(19,)` | Value Statics: Total count 42912 - Distinct count 31 - Null count 49054   
+	AcceptedAnswerId INTEGER null, -- Example Values: `(15,)`, `(59,)`, `(5,)` | Value Statics: Total count 14697 - Distinct count 14697 - Null count 77269   
+	foreign key (LastEditorUserId) references users (Id) on update cascade on delete cascade,
+	ClosedDate DATETIME null, -- Example Values: `('2010-07-19 20:19:46.0',)`, `('2010-08-05 13:06:12.0',)`, `('2014-02-12 01:23:48.0',)` | Value Statics: Total count 1610 - Distinct count 1610 - Null count 90356   
+	PostTypeId INTEGER null, -- Example Values: `1`, `2`, `7`, `5`, `4` | Value Statics: Total count 91966 - Distinct count 7 - Null count 0   
+	CommentCount INTEGER null, -- Example Values: `(1,)`, `(4,)`, `(2,)` | Value Statics: Total count 91966 - Distinct count 39 - Null count 0   
+	Tags TEXT null, -- Example Values: `('<bayesian><prior><elicitation>',)`, `('<distributions><normality>',)`, `('<software><open-source>',)` | Value Statics: Total count 42912 - Distinct count 28528 - Null count 49054   
+	OwnerUserId INTEGER null, -- Example Values: `(8,)`, `(24,)`, `(18,)` | Value Statics: Total count 90574 - Distinct count 21979 - Null count 1392   
+	FavoriteCount INTEGER null, -- Example Values: `(14,)`, `(8,)`, `(36,)` | Value Statics: Total count 13243 - Distinct count 77 - Null count 78723   
+	LastEditDate DATETIME null, -- Example Values: `('2010-08-07 17:56:44.0',)`, `('2011-02-12 05:50:03.0',)`, `('2010-07-19 19:21:15.0',)` | Value Statics: Total count 45032 - Distinct count 44925 - Null count 46934   
+	LastEditorUserId INTEGER null, -- Example Values: `(88,)`, `(183,)`, `(23,)` | Value Statics: Total count 44605 - Distinct count 6578 - Null count 47361   
+	CommunityOwnedDate DATETIME null, -- Example Values: `('2010-07-19 19:13:28.0',)`, `('2010-07-19 19:14:43.0',)`, `('2010-08-09 13:05:50.0',)` | Value Statics: Total count 2467 - Distinct count 1938 - Null count 89499   
+);
+
+CREATE TABLE votes
+(
+	foreign key (PostId) references posts (Id) on update cascade on delete cascade,
+	BountyAmount INTEGER null, -- Example Values: `50`, `25`, `0`, `100`, `150` | Value Statics: Total count 101 - Distinct count 6 - Null count 38829   
+	UserId INTEGER null, -- Example Values: `(58,)`, `(6,)`, `(66,)` | Value Statics: Total count 3425 - Distinct count 509 - Null count 35505   
+	CreationDate DATE null, -- Example Values: `('2010-07-19',)`, `('2010-07-20',)`, `('2010-07-21',)` | Value Statics: Total count 38930 - Distinct count 287 - Null count 0   
+	Id INTEGER not null primary key,
+	foreign key (UserId) references users (Id) on update cascade on delete cascade,
+	PostId INTEGER null, -- Example Values: `(3,)`, `(2,)`, `(5,)` | Value Statics: Total count 38930 - Distinct count 8584 - Null count 0   
+	VoteTypeId INTEGER null, -- Example Values: `2`, `5`, `3`, `1`, `8` | Value Statics: Total count 38930 - Distinct count 10 - Null count 0   
+);
+
+CREATE TABLE comments
+(
+	PostId INTEGER null, -- Example Values: `(3,)`, `(5,)`, `(9,)` | Value Statics: Total count 100000 - Distinct count 30915 - Null count 0   
+	UserDisplayName TEXT null, -- Example Values: `('user28',)`, `('Statprof',)`, `('jjgibaja',)` | Value Statics: Total count 2252 - Distinct count 670 - Null count 97748 | Column Name Meaning: User Display Name | Column Description: user's display name 
+	Text TEXT null, --  
+	foreign key (PostId) references posts (Id) on update cascade on delete cascade,
+	Score INTEGER null, -- Example Values: `(5,)`, `(0,)`, `(11,)` | Value Statics: Total count 100000 - Distinct count 33 - Null count 0   
+	CreationDate DATETIME null, -- Example Values: `('2010-07-19 19:15:52.0',)`, `('2010-07-19 19:16:14.0',)`, `('2010-07-19 19:18:54.0',)` | Value Statics: Total count 100000 - Distinct count 99916 - Null count 0   
+	UserId INTEGER null, -- Example Values: `(13,)`, `(37,)`, `(5,)` | Value Statics: Total count 97744 - Distinct count 7421 - Null count 2256   
+	foreign key (UserId) references users (Id) on update cascade on delete cascade,
+	Id INTEGER not null primary key,
+);
+
+**************************

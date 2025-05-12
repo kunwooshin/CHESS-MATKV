@@ -1,0 +1,44 @@
+【Table creation statements】
+CREATE TABLE transactions_1k
+(
+	TransactionID INTEGER primary key autoincrement,
+	CardID INTEGER, -- Example Values: `(486621,)`, `(550134,)`, `(684220,)` | Value Statics: Total count 1000 - Distinct count 902 - Null count 0 | Column Name Meaning: Card ID | Column Description: Card ID 
+	CustomerID INTEGER, -- Example Values: `(31543,)`, `(46707,)`, `(7654,)` | Value Statics: Total count 1000 - Distinct count 517 - Null count 0   
+	Date DATE, -- Example Values: `('2012-08-24',)`, `('2012-08-23',)`, `('2012-08-25',)` | Value Statics: Total count 1000 - Distinct count 4 - Null count 0  | Column Description: Date 
+	Amount INTEGER, -- Example Values: `(28,)`, `(18,)`, `(1,)` | Value Statics: Total count 1000 - Distinct count 83 - Null count 0   
+	GasStationID INTEGER, -- Example Values: `(3704,)`, `(656,)`, `(741,)` | Value Statics: Total count 1000 - Distinct count 437 - Null count 0 | Column Name Meaning: Gas Station ID | Column Description: Gas Station ID 
+	Time TEXT, -- Example Values: `('09:41:00',)`, `('10:03:00',)`, `('13:53:00',)` | Value Statics: Total count 1000 - Distinct count 599 - Null count 0   
+	Price REAL, -- Example Values: `(672.64,)`, `(430.72,)`, `(121.99,)` | Value Statics: Total count 1000 - Distinct count 930 - Null count 0   
+	ProductID INTEGER, -- Example Values: `(2,)`, `(23,)`, `(5,)` | Value Statics: Total count 1000 - Distinct count 28 - Null count 0 | Column Name Meaning: Product ID | Column Description: Product ID 
+);
+
+CREATE TABLE yearmonth
+(
+	Consumption REAL, -- Example Values: `(528.3,)`, `(1598.28,)`, `(1931.36,)` | Value Statics: Total count 100000 - Distinct count 85834 - Null count 0  | Column Description: consumption 
+	CustomerID INTEGER not null references customers on update cascade on delete cascade references customers, -- Example Values: `(39,)`, `(63,)`, `(172,)` | Value Statics: Total count 100000 - Distinct count 26471 - Null count 0   
+	Date TEXT not null, -- Example Values: `('201112',)`, `('201201',)`, `('201202',)` | Value Statics: Total count 100000 - Distinct count 7 - Null count 0  | Column Description: Date 
+	primary key (Date, CustomerID),
+);
+
+CREATE TABLE products
+(
+	Description TEXT null, -- Example Values: `('Rucní zadání',)`, `('Nafta',)`, `('Special',)` | Value Statics: Total count 591 - Distinct count 529 - Null count 0   
+	ProductID INTEGER UNIQUE not null primary key,
+);
+
+CREATE TABLE gasstations
+(
+	GasStationID INTEGER UNIQUE not null primary key,
+	ChainID INTEGER null, -- Example Values: `(13,)`, `(6,)`, `(23,)` | Value Statics: Total count 5716 - Distinct count 233 - Null count 0 | Column Name Meaning: Chain ID | Column Description: Chain ID 
+	Segment TEXT null, -- Example Values: `Value for money`, `Premium`, `Other`, `Noname`, `Discount` | Value Statics: Total count 5716 - Distinct count 5 - Null count 0   
+	Country TEXT null, -- Example Values: `CZE`, `SVK` | Value Statics: Total count 5716 - Distinct count 2 - Null count 0   
+);
+
+CREATE TABLE customers
+(
+	Segment TEXT null, -- Example Values: `SME`, `LAM`, `KAM` | Value Statics: Total count 32461 - Distinct count 3 - Null count 0   
+	CustomerID INTEGER UNIQUE not null primary key,
+	Currency TEXT null, -- Example Values: `CZK` | Value Statics: Total count 32461 - Distinct count 2 - Null count 0  | Column Description: Currency 
+);
+
+**************************

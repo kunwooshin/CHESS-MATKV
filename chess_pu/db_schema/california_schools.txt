@@ -1,0 +1,105 @@
+【Table creation statements】
+CREATE TABLE schools
+(
+	Longitude REAL null, -- Example Values: `(-122.09713,)`, `(-121.99391,)`, `(-122.26815,)` | Value Statics: Total count 12863 - Distinct count 11278 - Null count 4823   
+	AdmFName2 TEXT null, -- Example Values: `('Sau-Lim (Lance)',)`, `('Jennifer',)`, `('Annalisa',)` | Value Statics: Total count 431 - Distinct count 285 - Null count 17255   | Value Description: SAME as 1
+	MailZip TEXT null, -- Example Values: `('94544-1136',)`, `('94560-5359',)`, `('94612',)` | Value Statics: Total count 17394 - Distinct count 10298 - Null count 292   
+	AdmEmail2 TEXT null, -- Example Values: `('stsang@unityhigh.org',)`, `('jkoelling@efcps.net',)`, `('annalisa.moore@neaclc.org',)` | Value Statics: Total count 424 - Distinct count 382 - Null count 17262   
+	Charter INTEGER null, -- Example Values: `1`, `0` | Value Statics: Total count 16317 - Distinct count 2 - Null count 1369   
+	AdmEmail1 TEXT null, -- Example Values: `('lkmonroe@acoe.org',)`, `('laura@envisionacademy.org',)`, `('cliffordt@communityschoolforcreativeeducation.org',)` | Value Statics: Total count 11674 - Distinct count 10492 - Null count 6012   
+	AdmEmail3 TEXT null, -- Example Values: `('dsarratore@vincentacademy.org',)`, `('gmunoz@piedmont.k12.ca.us',)`, `('vickiechang@acoe.org',)` | Value Statics: Total count 42 - Distinct count 42 - Null count 17644   
+	CharterNum TEXT null, -- Example Values: `('0728',)`, `('0811',)`, `('1049',)` | Value Statics: Total count 1801 - Distinct count 1763 - Null count 15885  | Column Description: The charter school number, | Value Description: 4-digit number assigned to a charter school.
+	MailCity TEXT null, -- Example Values: `('Hayward',)`, `('Newark',)`, `('Oakland',)` | Value Statics: Total count 17394 - Distinct count 1132 - Null count 292   
+	LastUpdate DATE not null, -- Example Values: `('2015-06-23',)`, `('2015-09-01',)`, `('2015-06-18',)` | Value Statics: Total count 17686 - Distinct count 757 - Null count 0   
+	School TEXT null, -- Example Values: `MethodSchools` | Value Statics: Total count 16317 - Distinct count 13875 - Null count 1369  | Column Description: School 
+	AdmLName1 TEXT null, -- Example Values: `('Monroe',)`, `('Robell',)`, `('Thompson',)` | Value Statics: Total count 11700 - Distinct count 6394 - Null count 5986   
+	OpenDate DATE null, -- Example Values: `('2005-08-29',)`, `('2006-08-28',)`, `('2008-08-21',)` | Value Statics: Total count 16317 - Distinct count 1406 - Null count 1369   
+	AdmFName1 TEXT null, -- Example Values: `('L Karen',)`, `('Laura',)`, `('Clifford',)` | Value Statics: Total count 11700 - Distinct count 2327 - Null count 5986   
+	MailStrAbr TEXT null, -- Example Values: `('313 West Winton Ave.',)`, `('39899 Balentine Dr., Ste. 335',)`, `('1515 Webster St.',)` | Value Statics: Total count 17394 - Distinct count 12429 - Null count 292   
+	NCESDist TEXT null, -- Example Values: `('0691051',)`, `('0600002',)`, `('0600003',)` | Value Statics: Total count 16656 - Distinct count 1193 - Null count 1030   
+	Phone TEXT null, -- Example Values: `('(510) 887-0152',)`, `('(510) 596-8901',)`, `('(510) 686-4131',)` | Value Statics: Total count 11717 - Distinct count 10632 - Null count 5969  | Column Description: Phone 
+	Virtual TEXT null, -- Example Values: `P`, `N`, `F` | Value Statics: Total count 10818 - Distinct count 3 - Null count 6868   
+	SOC TEXT null, -- Example Values: `('65',)`, `('66',)`, `('60',)` | Value Statics: Total count 16317 - Distinct count 20 - Null count 1369   
+	AdmLName3 TEXT null, -- Example Values: `('Sarratore',)`, `('Munoz',)`, `('Chang',)` | Value Statics: Total count 42 - Distinct count 42 - Null count 17644   
+	AdmLName2 TEXT null, -- Example Values: `('Tsang',)`, `('Koelling',)`, `('Moore',)` | Value Statics: Total count 431 - Distinct count 363 - Null count 17255   
+	MailState TEXT null, -- Example Values: `CA` | Value Statics: Total count 17394 - Distinct count 1 - Null count 292   
+	CDSCode TEXT not null primary key,
+	EdOpsName TEXT null, -- Example Values: `Traditional`, `Juvenile Court School`, `County Community School`, `Opportunity School`, `Special Education School` | Value Statics: Total count 11975 - Distinct count 13 - Null count 5711   
+	City TEXT null, -- Example Values: `('Hayward',)`, `('Newark',)`, `('Oakland',)` | Value Statics: Total count 17393 - Distinct count 1165 - Null count 293   
+	District TEXT not null, -- Example Values: `('Alameda County Office of Education',)`, `('California School for the Blind (State Special Schl)',)`, `('California School for the Deaf-Fremont (State Special Schl)',)` | Value Statics: Total count 17686 - Distinct count 1411 - Null count 0   
+	GSoffered TEXT null, -- Example Values: `('K-12',)`, `('9-12',)`, `('K-8',)` | Value Statics: Total count 13804 - Distinct count 94 - Null count 3882   
+	GSserved TEXT null, -- Example Values: `('K-12',)`, `('9-12',)`, `('K-7',)` | Value Statics: Total count 11943 - Distinct count 81 - Null count 5743   
+	AdmFName3 TEXT null, -- Example Values: `('Drew',)`, `('Irma',)`, `('Vickie',)` | Value Statics: Total count 42 - Distinct count 40 - Null count 17644   
+	ClosedDate DATE null, -- Example Values: `('2015-07-31',)`, `('2015-06-30',)`, `('1989-06-30',)` | Value Statics: Total count 5694 - Distinct count 899 - Null count 11992   
+	SOCType TEXT null, -- Example Values: `('K-12 Schools (Public)',)`, `('High Schools (Public)',)`, `('Elementary Schools (Public)',)` | Value Statics: Total count 16317 - Distinct count 20 - Null count 1369   
+	MailStreet TEXT null, -- Example Values: `('313 West Winton Avenue',)`, `('39899 Balentine Drive, Suite 335',)`, `('1515 Webster Street',)` | Value Statics: Total count 17394 - Distinct count 12395 - Null count 292   
+	StreetAbr TEXT null, -- Example Values: `('313 West Winton Ave.',)`, `('39899 Balentine Dr., Ste. 335',)`, `('1515 Webster St.',)` | Value Statics: Total count 17392 - Distinct count 13633 - Null count 294   
+	Magnet INTEGER null, -- Example Values: `0`, `1` | Value Statics: Total count 10610 - Distinct count 2 - Null count 7076   
+	DOC TEXT not null, -- Example Values: `00`, `31`, `34`, `42`, `54` | Value Statics: Total count 17686 - Distinct count 12 - Null count 0   
+	Latitude REAL null, -- Example Values: `(37.658212,)`, `(37.521436,)`, `(37.80452,)` | Value Statics: Total count 12863 - Distinct count 11436 - Null count 4823   
+	Ext TEXT null, -- Example Values: `('130',)`, `('1240',)`, `('1200',)` | Value Statics: Total count 540 - Distinct count 379 - Null count 17146   
+	EdOpsCode TEXT null, -- Example Values: `TRAD`, `JUV`, `COMM`, `OPP`, `SPEC` | Value Statics: Total count 11975 - Distinct count 13 - Null count 5711   
+	EILName TEXT null, -- Example Values: `Elementary-High Combination`, `High School`, `Elementary`, `Ungraded`, `Intermediate/Middle/Junior High` | Value Statics: Total count 16317 - Distinct count 7 - Null count 1369   
+	Street TEXT null, -- Example Values: `('313 West Winton Avenue',)`, `('39899 Balentine Drive, Suite 335',)`, `('1515 Webster Street',)` | Value Statics: Total count 17392 - Distinct count 13593 - Null count 294   
+	DOCType TEXT not null, -- Example Values: `County Office of Education (COE)`, `State Special Schools`, `Non-School Locations`, `Joint Powers Authority (JPA)`, `Unified School District` | Value Statics: Total count 17686 - Distinct count 12 - Null count 0   
+	Zip TEXT null, -- Example Values: `('94544-1136',)`, `('94560-5359',)`, `('94612-3355',)` | Value Statics: Total count 17393 - Distinct count 11184 - Null count 293   
+	FundingType TEXT null, -- Example Values: `Directly funded`, `Locally funded`, `Not in CS funding model` | Value Statics: Total count 1642 - Distinct count 3 - Null count 16044  | Column Description: Indicates the charter school funding type | Value Description: Values are as follows:  ·       Not in CS (California School) funding model  ·       Locally funded  ·       Directly funded
+	State TEXT null, -- Example Values: `CA` | Value Statics: Total count 17393 - Distinct count 1 - Null count 293   
+	Website TEXT null, -- Example Values: `('www.acoe.org',)`, `('www.envisionacademy.org/',)`, `('www.aspirepublicschools.org',)` | Value Statics: Total count 6964 - Distinct count 4082 - Null count 10722   
+	EILCode TEXT null, -- Example Values: `ELEMHIGH`, `HS`, `ELEM`, `UG`, `INTMIDJR` | Value Statics: Total count 16317 - Distinct count 7 - Null count 1369   
+	StatusType TEXT not null, -- Example Values: `Active`, `Closed`, `Merged`, `Pending` | Value Statics: Total count 17686 - Distinct count 4 - Null count 0   
+	County TEXT not null, -- Example Values: `('Alameda',)`, `('Alpine',)`, `('Amador',)` | Value Statics: Total count 17686 - Distinct count 58 - Null count 0   
+	NCESSchool TEXT null, -- Example Values: `('10546',)`, `('10947',)`, `('12283',)` | Value Statics: Total count 12646 - Distinct count 12321 - Null count 5040   
+);
+
+CREATE TABLE frpm
+(
+	`NSLP Provision Status` TEXT null, -- Example Values: `Breakfast Provision 2`, `Provision 2`, `CEP`, `Lunch Provision 2`, `Provision 1` | Value Statics: Total count 1847 - Distinct count 7 - Null count 8139   
+	`County Name` TEXT null, -- Example Values: `('Alameda',)`, `('Alpine',)`, `('Amador',)` | Value Statics: Total count 9986 - Distinct count 58 - Null count 0   
+	`Free Meal Count (K-12)` REAL null, -- Example Values: `(565.0,)`, `(186.0,)`, `(134.0,)` | Value Statics: Total count 9930 - Distinct count 1216 - Null count 56   
+	`2013-14 CALPADS Fall 1 Certification Status` INTEGER null, -- Example Values: `1` | Value Statics: Total count 9986 - Distinct count 1 - Null count 0   
+	`School Name` TEXT null, -- Example Values: `MethodSchools` | Value Statics: Total count 9986 - Distinct count 8652 - Null count 0  | Column Description: School Name 
+	`Charter Funding Type` TEXT null, -- Example Values: `Directly funded`, `Locally funded`, `Not in CS funding model` | Value Statics: Total count 1167 - Distinct count 3 - Null count 8819  | Column Description: Charter Funding Type 
+	`Low Grade` TEXT null, -- Example Values: `K`, `9`, `1`, `P`, `6` | Value Statics: Total count 9986 - Distinct count 15 - Null count 0   
+	`FRPM Count (K-12)` REAL null, -- Example Values: `(715.0,)`, `(186.0,)`, `(175.0,)` | Value Statics: Total count 9936 - Distinct count 1361 - Null count 50   
+	`Charter School (Y/N)` INTEGER null, -- Example Values: `1`, `0` | Value Statics: Total count 9941 - Distinct count 2 - Null count 45  | Column Description: Charter School (Y/N) | Value Description: 0: N; 1: Y
+	`Free Meal Count (Ages 5-17)` REAL null, -- Example Values: `(553.0,)`, `(182.0,)`, `(128.0,)` | Value Statics: Total count 9908 - Distinct count 1205 - Null count 78   
+	`District Type` TEXT null, -- Example Values: `County Office of Education (COE)`, `State Special Schools`, `Unified School District`, `Elementary School District`, `High School District` | Value Statics: Total count 9986 - Distinct count 8 - Null count 0   
+	IRC INTEGER null, -- Example Values: `1`, `0` | Value Statics: Total count 9941 - Distinct count 2 - Null count 45   
+	`Percent (%) Eligible Free (K-12)` REAL null, -- Example Values: `(0.519779208831647,)`, `(0.470886075949367,)`, `(0.549180327868853,)` | Value Statics: Total count 9930 - Distinct count 8658 - Null count 56   
+	`Educational Option Type` TEXT null, -- Example Values: `Traditional`, `Juvenile Court School`, `County Community School`, `State Special School`, `Alternative School of Choice` | Value Statics: Total count 9941 - Distinct count 12 - Null count 45   
+	`Enrollment (K-12)` REAL null, -- Example Values: `(1087.0,)`, `(395.0,)`, `(244.0,)` | Value Statics: Total count 9986 - Distinct count 1882 - Null count 0   
+	CDSCode TEXT not null primary key,
+	`High Grade` TEXT null, -- Example Values: `12`, `8`, `5`, `Adult`, `6` | Value Statics: Total count 9986 - Distinct count 17 - Null count 0   
+	`District Name` TEXT null, -- Example Values: `('Alameda County Office of Education',)`, `('California School for the Blind (State Special Schl)',)`, `('California School for the Deaf-Fremont (State Special Schl)',)` | Value Statics: Total count 9986 - Distinct count 1000 - Null count 0   
+	`County Code` TEXT null, -- Example Values: `('01',)`, `('02',)`, `('03',)` | Value Statics: Total count 9986 - Distinct count 58 - Null count 0   
+	`Percent (%) Eligible FRPM (Ages 5-17)` REAL null, -- Example Values: `(0.65607476635514,)`, `(0.484042553191489,)`, `(0.730434782608696,)` | Value Statics: Total count 9914 - Distinct count 8557 - Null count 72   
+	`District Code` INTEGER null, -- Example Values: `(10017,)`, `(31609,)`, `(31617,)` | Value Statics: Total count 9986 - Distinct count 1012 - Null count 0   
+	`Percent (%) Eligible Free (Ages 5-17)` REAL null, -- Example Values: `(0.516822429906542,)`, `(0.484042553191489,)`, `(0.556521739130435,)` | Value Statics: Total count 9908 - Distinct count 8552 - Null count 78   
+	`Enrollment (Ages 5-17)` REAL null, -- Example Values: `(1070.0,)`, `(376.0,)`, `(230.0,)` | Value Statics: Total count 9972 - Distinct count 1845 - Null count 14   
+	`Percent (%) Eligible FRPM (K-12)` REAL null, -- Example Values: `(0.657773689052438,)`, `(0.470886075949367,)`, `(0.717213114754098,)` | Value Statics: Total count 9936 - Distinct count 8623 - Null count 50   
+	`Charter School Number` TEXT null, -- Example Values: `('0728',)`, `('0811',)`, `('1049',)` | Value Statics: Total count 1167 - Distinct count 1152 - Null count 8819  | Column Description: Charter School Number 
+	foreign key (CDSCode) references schools (CDSCode),
+	`School Type` TEXT null, -- Example Values: `K-12 Schools (Public)`, `High Schools (Public)`, `Elementary Schools (Public)`, `Juvenile Court Schools`, `County Community` | Value Statics: Total count 9941 - Distinct count 17 - Null count 45  | Column Description: School Type 
+	`FRPM Count (Ages 5-17)` REAL null, -- Example Values: `(702.0,)`, `(182.0,)`, `(168.0,)` | Value Statics: Total count 9914 - Distinct count 1330 - Null count 72   
+	`Academic Year` TEXT null, -- Example Values: `2014-2015` | Value Statics: Total count 9986 - Distinct count 1 - Null count 0   
+	`School Code` TEXT null, -- Example Values: `('0109835',)`, `('0112607',)`, `('0118489',)` | Value Statics: Total count 9986 - Distinct count 9942 - Null count 0   
+);
+
+CREATE TABLE satscores
+(
+	AvgScrMath INTEGER null, -- Example Values: `(418,)`, `(546,)`, `(387,)` | Value Statics: Total count 1673 - Distinct count 295 - Null count 596 | Column Name Meaning: average scores in Math | Column Description: average scores in Math | Value Description: average scores in Math
+	enroll12 INTEGER not null, -- Example Values: `(398,)`, `(62,)`, `(75,)` | Value Statics: Total count 2269 - Distinct count 835 - Null count 0   
+	NumTstTakr INTEGER not null, -- Example Values: `(88,)`, `(17,)`, `(71,)` | Value Statics: Total count 2269 - Distinct count 547 - Null count 0 | Column Name Meaning: Number of Test Takers | Column Description: Number of Test Takers in this school | Value Description: number of test takers in each school
+	foreign key (cds) references schools (CDSCode),
+	NumGE1500 INTEGER null, -- Example Values: `(14,)`, `(9,)`, `(5,)` | Value Statics: Total count 1673 - Distinct count 368 - Null count 596 | Column Name Meaning: Number of Test Takers Whose Total SAT Scores Are Greater or Equal to 1500 | Column Description: Number of Test Takers Whose Total SAT Scores Are Greater or Equal to 1500 | Value Description: Number of Test Takers Whose Total SAT Scores Are Greater or Equal to 1500    Excellence Rate = NumGE1500 / NumTstTakr
+	dname TEXT null, -- Example Values: `('Alameda County Office of Education',)`, `('Alameda Unified',)`, `('Albany City Unified',)` | Value Statics: Total count 2269 - Distinct count 520 - Null count 0   
+	rtype TEXT not null, -- Example Values: `D`, `S` | Value Statics: Total count 2269 - Distinct count 2 - Null count 0   
+	sname TEXT null, -- Example Values: `('FAME Public Charter',)`, `('Envision Academy for Arts & Technology',)`, `('Aspire California College Preparatory Academy',)` | Value Statics: Total count 1749 - Distinct count 1665 - Null count 520 | Column Name Meaning: school name | Column Description: school name 
+	AvgScrRead INTEGER null, -- Example Values: `(418,)`, `(503,)`, `(397,)` | Value Statics: Total count 1673 - Distinct count 269 - Null count 596 | Column Name Meaning: average scores in Reading | Column Description: average scores in Reading | Value Description: average scores in Reading
+	AvgScrWrite INTEGER null, -- Example Values: `(417,)`, `(505,)`, `(395,)` | Value Statics: Total count 1673 - Distinct count 267 - Null count 596   
+	cds TEXT not null primary key,
+	cname TEXT null, -- Example Values: `('Alameda',)`, `('Amador',)`, `('Butte',)` | Value Statics: Total count 2269 - Distinct count 57 - Null count 0   
+);
+
+**************************

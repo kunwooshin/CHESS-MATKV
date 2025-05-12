@@ -1,0 +1,81 @@
+【Table creation statements】
+CREATE TABLE Patient
+(
+	Birthday DATE null, -- Example Values: `('1934-02-13',)`, `('1937-05-02',)`, `('1956-04-14',)` | Value Statics: Total count 1237 - Distinct count 1193 - Null count 1   
+	`First Date` DATE null, -- Example Values: `('1993-02-10',)`, `('1973-01-01',)`, `('1992-02-03',)` | Value Statics: Total count 987 - Distinct count 797 - Null count 251  | Column Description: the date when a patient came to the hospital 
+	ID INTEGER default 0 not null primary key,
+	Diagnosis TEXT null, -- Example Values: `('RA susp.',)`, `('PSS',)`, `('SLE',)` | Value Statics: Total count 1238 - Distinct count 220 - Null count 0   
+	SEX TEXT null, -- Example Values: `F`, `M`, `` | Value Statics: Total count 1238 - Distinct count 3 - Null count 0  | Column Description: Sex | Value Description: F: female; M: male
+	Description DATE null, -- Example Values: `('1994-02-14',)`, `('1996-12-01',)`, `('1991-08-13',)` | Value Statics: Total count 1022 - Distinct count 97 - Null count 216  | Column Description: the first date when a patient data was recorded | Value Description: null or empty: not recorded
+	Admission TEXT null, -- Example Values: `+`, `-`, ``, `+(` | Value Statics: Total count 1238 - Distinct count 4 - Null count 0  | Column Description: patient was admitted to the hospital (+) or followed at the outpatient clinic (-) | Value Description: patient was admitted to the hospital (+) or followed at the outpatient clinic (-)
+);
+
+CREATE TABLE Laboratory
+(
+	GPT INTEGER null, -- Example Values: `(36,)`, `(31,)`, `(22,)` | Value Statics: Total count 11274 - Distinct count 302 - Null count 2634   
+	SC170 TEXT null, -- Example Values: `16`, `1`, `0`, `negative`, `4` | Value Statics: Total count 28 - Distinct count 5 - Null count 13880   
+	ALB REAL null, -- Example Values: `(3.3,)`, `(3.4,)`, `(3.6,)` | Value Statics: Total count 11068 - Distinct count 39 - Null count 2840   
+	DNA TEXT null, -- Example Values: `100` | Value Statics: Total count 69 - Distinct count 66 - Null count 13839   
+	`DNA-II` INTEGER null, --  
+	GLU INTEGER null, -- Example Values: `(88,)`, `(134,)`, `(161,)` | Value Statics: Total count 1705 - Distinct count 208 - Null count 12203   
+	RA TEXT null, -- Example Values: `-`, `+`, `+-`, `2+`, `7-` | Value Statics: Total count 2855 - Distinct count 5 - Null count 11053 | Column Name Meaning: Rhuematoid Factor | Column Description: Rhuematoid Factor | Value Description: Commonsense evidence:  Normal range: N= -, +-
+	GOT INTEGER null, -- Example Values: `(34,)`, `(29,)`, `(26,)` | Value Statics: Total count 11278 - Distinct count 218 - Null count 2630   
+	C4 INTEGER null, -- Example Values: `(14,)`, `(26,)`, `(35,)` | Value Statics: Total count 5461 - Distinct count 62 - Null count 8447   
+	TG INTEGER null, -- Example Values: `(185,)`, `(205,)`, `(254,)` | Value Statics: Total count 6437 - Distinct count 392 - Null count 7471   
+	PLT INTEGER null, -- Example Values: `(227,)`, `(242,)`, `(233,)` | Value Statics: Total count 11287 - Distinct count 657 - Null count 2621   
+	Date DATE default '0000-00-00' not null, -- Example Values: `('1991-09-11',)`, `('1991-09-17',)`, `('1991-09-19',)` | Value Statics: Total count 13908 - Distinct count 3723 - Null count 0   
+	CENTROMEA TEXT null, -- Example Values: `0`, `negative` | Value Statics: Total count 15 - Distinct count 2 - Null count 13893   
+	RBC REAL null, -- Example Values: `(2.6,)`, `(2.9,)`, `(3.4,)` | Value Statics: Total count 12081 - Distinct count 56 - Null count 1827   
+	ID INTEGER default 0 not null, -- Example Values: `(27654,)`, `(30609,)`, `(43003,)` | Value Statics: Total count 13908 - Distinct count 302 - Null count 0   
+	`T-BIL` REAL null, -- Example Values: `(0.3,)`, `(0.2,)`, `(0.4,)` | Value Statics: Total count 9621 - Distinct count 40 - Null count 4287   
+	TAT INTEGER null, -- Example Values: `(77,)`, `(108,)`, `(115,)` | Value Statics: Total count 142 - Distinct count 82 - Null count 13766   
+	PT REAL null, -- Example Values: `(11.3,)`, `(12.0,)`, `(11.8,)` | Value Statics: Total count 621 - Distinct count 104 - Null count 13287   
+	primary key (ID, Date),
+	foreign key (ID) references Patient (ID) on update cascade on delete cascade,
+	IGA INTEGER null, -- Example Values: `(145,)`, `(188,)`, `(118,)` | Value Statics: Total count 2680 - Distinct count 682 - Null count 11228   
+	CRP TEXT null, -- Example Values: `('0.6',)`, `('2.7',)`, `('1.2',)` | Value Statics: Total count 11455 - Distinct count 211 - Null count 2453   
+	CRE REAL null, -- Example Values: `(0.8,)`, `(0.9,)`, `(0.7,)` | Value Statics: Total count 11253 - Distinct count 65 - Null count 2655   
+	WBC REAL null, -- Example Values: `(5.0,)`, `(10.4,)`, `(10.5,)` | Value Statics: Total count 12081 - Distinct count 217 - Null count 1827   
+	TAT2 INTEGER null, -- Example Values: `(113,)`, `(88,)`, `(104,)` | Value Statics: Total count 119 - Distinct count 60 - Null count 13789   
+	IGM INTEGER null, -- Example Values: `(46,)`, `(132,)`, `(56,)` | Value Statics: Total count 2678 - Distinct count 487 - Null count 11230   
+	HCT REAL null, -- Example Values: `(20.3,)`, `(21.6,)`, `(24.7,)` | Value Statics: Total count 12081 - Distinct count 363 - Null count 1827 | Column Name Meaning: Hematoclit | Column Description: Hematoclit | Value Description: Commonsense evidence: Normal range: 29 < N < 52
+	LDH INTEGER null, -- Example Values: `(567,)`, `(579,)`, `(684,)` | Value Statics: Total count 11305 - Distinct count 917 - Null count 2603   
+	`T-CHO` INTEGER null, -- Example Values: `(165,)`, `(134,)`, `(140,)` | Value Statics: Total count 10664 - Distinct count 325 - Null count 3244   
+	SSB TEXT null, -- Example Values: `0`, `negative`, `1`, `32`, `8` | Value Statics: Total count 93 - Distinct count 6 - Null count 13815   
+	ALP INTEGER null, -- Example Values: `(166,)`, `(154,)`, `(138,)` | Value Statics: Total count 11151 - Distinct count 532 - Null count 2757   
+	RF TEXT null, -- Example Values: `('<20.5',)`, `('<20.8',)`, `('<40',)` | Value Statics: Total count 3337 - Distinct count 903 - Null count 10571   
+	IGG INTEGER null, -- Example Values: `(339,)`, `(771,)`, `(430,)` | Value Statics: Total count 2680 - Distinct count 1516 - Null count 11228   
+	UA REAL null, -- Example Values: `(3.8,)`, `(4.2,)`, `(4.9,)` | Value Statics: Total count 11103 - Distinct count 132 - Null count 2805   
+	APTT INTEGER null, -- Example Values: `(108,)`, `(84,)`, `(76,)` | Value Statics: Total count 51 - Distinct count 27 - Null count 13857   
+	C3 INTEGER null, -- Example Values: `(30,)`, `(82,)`, `(103,)` | Value Statics: Total count 5461 - Distinct count 151 - Null count 8447   
+	TP REAL null, -- Example Values: `(4.5,)`, `(5.1,)`, `(5.5,)` | Value Statics: Total count 11118 - Distinct count 62 - Null count 2790   
+	FG REAL null, -- Example Values: `(27.0,)`, `(38.6,)`, `(27.6,)` | Value Statics: Total count 455 - Distinct count 279 - Null count 13453   
+	RNP TEXT null, -- Example Values: `0`, `1`, `256`, `negative`, `16` | Value Statics: Total count 143 - Distinct count 8 - Null count 13765 | Column Name Meaning: anti-ribonuclear protein | Column Description: anti-ribonuclear protein | Value Description: Commonsense evidence:  Normal range: N= -, +-
+	PIC INTEGER null, -- Example Values: `(320,)`, `(513,)`, `(284,)` | Value Statics: Total count 76 - Distinct count 63 - Null count 13832   
+	UN INTEGER null, -- Example Values: `(29,)`, `(36,)`, `(34,)` | Value Statics: Total count 11238 - Distinct count 108 - Null count 2670   
+	HGB REAL null, -- Example Values: `(6.4,)`, `(6.7,)`, `(7.9,)` | Value Statics: Total count 12081 - Distinct count 138 - Null count 1827   
+	CPK INTEGER null, -- Example Values: `(9,)`, `(10,)`, `(11,)` | Value Statics: Total count 5016 - Distinct count 463 - Null count 8892   
+	SM TEXT null, -- Example Values: `0`, `1`, `negative`, `2`, `8` | Value Statics: Total count 128 - Distinct count 5 - Null count 13780   
+	SSA TEXT null, -- Example Values: `0`, `negative`, `16`, `4`, `256` | Value Statics: Total count 99 - Distinct count 7 - Null count 13809 | Column Name Meaning: anti-SSA | Column Description: anti-SSA | Value Description: Commonsense evidence:  Normal range: N= -, +-
+	`U-PRO` TEXT null, -- Example Values: `100` | Value Statics: Total count 9667 - Distinct count 16 - Null count 4241   
+);
+
+CREATE TABLE Examination
+(
+	`Examination Date` DATE null, -- Example Values: `('1997-05-27',)`, `('1992-12-21',)`, `('1995-04-20',)` | Value Statics: Total count 796 - Distinct count 475 - Null count 10   
+	KCT TEXT null, -- Example Values: `-`, `+` | Value Statics: Total count 146 - Distinct count 2 - Null count 660   
+	`aCL IgG` REAL null, -- Example Values: `(1.3,)`, `(4.3,)`, `(2.3,)` | Value Statics: Total count 806 - Distinct count 115 - Null count 0   
+	Thrombosis INTEGER null, -- Example Values: `1`, `0`, `2`, `3` | Value Statics: Total count 806 - Distinct count 4 - Null count 0   
+	ID INTEGER null, -- Example Values: `(14872,)`, `(48473,)`, `(102490,)` | Value Statics: Total count 770 - Distinct count 763 - Null count 36   
+	LAC TEXT null, -- Example Values: `-`, `+` | Value Statics: Total count 222 - Distinct count 2 - Null count 584   
+	foreign key (ID) references Patient (ID) on update cascade on delete cascade,
+	RVVT TEXT null, -- Example Values: `-`, `+` | Value Statics: Total count 146 - Distinct count 2 - Null count 660   
+	Diagnosis TEXT null, -- Example Values: `('MCTD, AMI',)`, `('SLE',)`, `('PSS',)` | Value Statics: Total count 475 - Distinct count 181 - Null count 331   
+	Symptoms TEXT null, -- Example Values: `('AMI',)`, `('CNS lupus',)`, `('Apo',)` | Value Statics: Total count 80 - Distinct count 39 - Null count 726   
+	`ANA Pattern` TEXT null, -- Example Values: `P`, `P,S`, `S`, `D,P,S`, `P.S` | Value Statics: Total count 545 - Distinct count 15 - Null count 261   
+	`aCL IgM` REAL null, -- Example Values: `(1.6,)`, `(4.6,)`, `(2.5,)` | Value Statics: Total count 806 - Distinct count 140 - Null count 0   
+	`aCL IgA` INTEGER null, -- Example Values: `(0,)`, `(3,)`, `(4,)` | Value Statics: Total count 806 - Distinct count 52 - Null count 0   
+	ANA INTEGER null, -- Example Values: `256`, `0`, `16`, `4`, `1024` | Value Statics: Total count 768 - Distinct count 8 - Null count 38   
+);
+
+**************************

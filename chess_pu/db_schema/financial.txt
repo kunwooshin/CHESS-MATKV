@@ -1,0 +1,97 @@
+【Table creation statements】
+CREATE TABLE disp
+(
+	foreign key (account_id) references account (account_id),
+	client_id INTEGER not null, -- Example Values: `(1,)`, `(2,)`, `(3,)` | Value Statics: Total count 5369 - Distinct count 5369 - Null count 0   
+	account_id INTEGER not null, -- Example Values: `(1,)`, `(2,)`, `(3,)` | Value Statics: Total count 5369 - Distinct count 4500 - Null count 0   
+	type TEXT not null, -- Example Values: `OWNER`, `DISPONENT` | Value Statics: Total count 5369 - Distinct count 2 - Null count 0   
+	foreign key (client_id) references client (client_id),
+	disp_id INTEGER not null primary key,
+);
+
+CREATE TABLE district
+(
+	A6 TEXT not null, -- Example Values: `('0',)`, `('26',)`, `('29',)` | Value Statics: Total count 77 - Distinct count 36 - Null count 0 | Column Name Meaning: no. of municipalities with inhabitants 500-1999 | Column Description: municipality < district < region 
+	A4 TEXT not null, -- Example Values: `('1204953',)`, `('88884',)`, `('75232',)` | Value Statics: Total count 77 - Distinct count 77 - Null count 0   
+	A8 INTEGER not null, -- Example Values: `1`, `2`, `3`, `0`, `4` | Value Statics: Total count 77 - Distinct count 6 - Null count 0 | Column Name Meaning: no. of municipalities with inhabitants > 10000 | Column Description: municipality < district < region 
+	A16 INTEGER not null, -- Example Values: `(99107,)`, `(2674,)`, `(2813,)` | Value Statics: Total count 77 - Distinct count 76 - Null count 0   
+	district_id INTEGER default 0 not null primary key,
+	A7 TEXT not null, -- Example Values: `0`, `6`, `4`, `1`, `7` | Value Statics: Total count 77 - Distinct count 17 - Null count 0 | Column Name Meaning: no. of municipalities with inhabitants 2000-9999 | Column Description: municipality < district < region 
+	A15 INTEGER null, -- Example Values: `(85677,)`, `(2159,)`, `(2824,)` | Value Statics: Total count 76 - Distinct count 75 - Null count 1   
+	A5 TEXT not null, -- Example Values: `('0',)`, `('80',)`, `('55',)` | Value Statics: Total count 77 - Distinct count 53 - Null count 0 | Column Name Meaning: no. of municipalities with inhabitants < 499 | Column Description: municipality < district < region 
+	A13 REAL not null, -- Example Values: `(0.43,)`, `(1.85,)`, `(2.21,)` | Value Statics: Total count 77 - Distinct count 73 - Null count 0   
+	A9 INTEGER not null, -- Example Values: `1`, `5`, `6`, `4`, `8` | Value Statics: Total count 77 - Distinct count 11 - Null count 0   
+	A11 INTEGER not null, -- Example Values: `(12541,)`, `(8507,)`, `(8980,)` | Value Statics: Total count 77 - Distinct count 76 - Null count 0 | Column Name Meaning: average salary | Column Description: average salary 
+	A14 INTEGER not null, -- Example Values: `(167,)`, `(132,)`, `(111,)` | Value Statics: Total count 77 - Distinct count 44 - Null count 0   
+	A3 TEXT not null, -- Example Values: `north Bohemia` | Value Statics: Total count 77 - Distinct count 8 - Null count 0   
+	A12 REAL null, -- Example Values: `(0.2,)`, `(1.6,)`, `(1.9,)` | Value Statics: Total count 76 - Distinct count 41 - Null count 1   
+	A10 REAL not null, -- Example Values: `(100.0,)`, `(46.7,)`, `(41.7,)` | Value Statics: Total count 77 - Distinct count 70 - Null count 0   
+	A2 TEXT not null, -- Example Values: `('Hl.m. Praha',)`, `('Benesov',)`, `('Beroun',)` | Value Statics: Total count 77 - Distinct count 77 - Null count 0   
+);
+
+CREATE TABLE card
+(
+	foreign key (disp_id) references disp (disp_id),
+	disp_id INTEGER not null, -- Example Values: `(9,)`, `(19,)`, `(41,)` | Value Statics: Total count 892 - Distinct count 892 - Null count 0   
+	card_id INTEGER default 0 not null primary key,
+	type TEXT not null, -- Example Values: `gold`, `classic`, `junior` | Value Statics: Total count 892 - Distinct count 3 - Null count 0   
+	issued DATE not null, -- Example Values: `('1998-10-16',)`, `('1998-03-13',)`, `('1995-09-03',)` | Value Statics: Total count 892 - Distinct count 607 - Null count 0   
+);
+
+CREATE TABLE order
+(
+	foreign key (account_id) references account (account_id),
+	k_symbol TEXT not null, -- Example Values: `SIPO`, `UVER`, ``, `POJISTNE`, `LEASING` | Value Statics: Total count 6471 - Distinct count 5 - Null count 0 | Column Name Meaning: characterization of the payment | Column Description: purpose of the payment | Value Description: "POJISTNE" stands for insurance payment "SIPO" stands for household payment "LEASING" stands for leasing "UVER" stands for loan payment
+	account_id INTEGER not null, -- Example Values: `(1,)`, `(2,)`, `(3,)` | Value Statics: Total count 6471 - Distinct count 3758 - Null count 0   
+	account_to INTEGER not null, -- Example Values: `(87144583,)`, `(89597016,)`, `(13943797,)` | Value Statics: Total count 6471 - Distinct count 6446 - Null count 0   
+	order_id INTEGER default 0 not null primary key,
+	bank_to TEXT not null, -- Example Values: `YZ`, `ST`, `QR`, `WX`, `CD` | Value Statics: Total count 6471 - Distinct count 13 - Null count 0   
+	amount REAL not null, -- Example Values: `(2452.0,)`, `(3372.7,)`, `(7266.0,)` | Value Statics: Total count 6471 - Distinct count 4412 - Null count 0   
+);
+
+CREATE TABLE loan
+(
+	account_id INTEGER not null, -- Example Values: `(2,)`, `(19,)`, `(25,)` | Value Statics: Total count 682 - Distinct count 682 - Null count 0   
+	payments REAL not null, -- Example Values: `(3373.0,)`, `(2523.0,)`, `(5308.0,)` | Value Statics: Total count 682 - Distinct count 577 - Null count 0   
+	duration INTEGER not null, -- Example Values: `24`, `12`, `60`, `48`, `36` | Value Statics: Total count 682 - Distinct count 5 - Null count 0   
+	amount INTEGER not null, -- Example Values: `(80952,)`, `(30276,)`, `(318480,)` | Value Statics: Total count 682 - Distinct count 645 - Null count 0   
+	loan_id INTEGER default 0 not null primary key,
+	date DATE not null, -- Example Values: `('1994-01-05',)`, `('1996-04-29',)`, `('1997-12-08',)` | Value Statics: Total count 682 - Distinct count 559 - Null count 0   
+	foreign key (account_id) references account (account_id),
+	status TEXT not null, -- Example Values: `A`, `B`, `D`, `C` | Value Statics: Total count 682 - Distinct count 4 - Null count 0  | Column Description: repayment status | Value Description: 'A' stands for contract finished, no problems; 'B' stands for contract finished, loan not paid; 'C' stands for running contract, OK so far; 'D' stands for running contract, client in debt
+);
+
+CREATE TABLE client
+(
+	gender TEXT not null, -- Example Values: `F`, `M` | Value Statics: Total count 5369 - Distinct count 2 - Null count 0   | Value Description: F：female  M：male
+	birth_date DATE not null, -- Example Values: `('1970-12-13',)`, `('1945-02-04',)`, `('1940-10-09',)` | Value Statics: Total count 5369 - Distinct count 4738 - Null count 0   
+	foreign key (district_id) references district (district_id),
+	client_id INTEGER not null primary key,
+	district_id INTEGER not null, -- Example Values: `(18,)`, `(1,)`, `(5,)` | Value Statics: Total count 5369 - Distinct count 77 - Null count 0   
+);
+
+CREATE TABLE trans
+(
+	operation TEXT null, -- Example Values: `VKLAD`, `PREVOD Z UCTU`, `PREVOD NA UCET`, `VYBER`, `VYBER KARTOU` | Value Statics: Total count 100000 - Distinct count 5 - Null count 0 | Column Name Meaning: mode of transaction | Column Description: mode of transaction | Value Description: "VYBER KARTOU": credit card withdrawal "VKLAD": credit in cash "PREVOD Z UCTU" :collection from another bank "VYBER": withdrawal in cash "PREVOD NA UCET": remittance to another bank
+	balance INTEGER not null, -- Example Values: `(1000,)`, `(4679,)`, `(20977,)` | Value Statics: Total count 100000 - Distinct count 51831 - Null count 0   
+	amount INTEGER not null, -- Example Values: `(1000,)`, `(3679,)`, `(2452,)` | Value Statics: Total count 100000 - Distinct count 6642 - Null count 0   
+	account_id INTEGER default 0 not null, -- Example Values: `(1,)`, `(2,)`, `(3,)` | Value Statics: Total count 100000 - Distinct count 514 - Null count 0   
+	account INTEGER null, -- Example Values: `(41403269,)`, `(87144583,)`, `(66487163,)` | Value Statics: Total count 35517 - Distinct count 888 - Null count 64483   
+	trans_id INTEGER default 0 not null primary key,
+	bank TEXT null, -- Example Values: `AB`, `YZ`, `ST`, `QR`, `WX` | Value Statics: Total count 33788 - Distinct count 13 - Null count 66212   
+	foreign key (account_id) references account (account_id),
+	type TEXT not null, -- Example Values: `PRIJEM`, `VYDAJ`, `VYBER` | Value Statics: Total count 100000 - Distinct count 3 - Null count 0   
+	k_symbol TEXT null, -- Example Values: `SIPO`, `SLUZBY`, `UVER`, ` `, `POJISTNE` | Value Statics: Total count 45750 - Distinct count 6 - Null count 54250 | Column Name Meaning: characterization of the transaction  | Value Description: "POJISTNE": stands for insurrance payment "SLUZBY": stands for payment for statement "UROK": stands for interest credited "SANKC. UROK": sanction interest if negative balance "SIPO": stands for household "DUCHOD": stands for old-age pension "UVER": stands for loan payment
+	date DATE not null, -- Example Values: `('1995-03-24',)`, `('1995-04-13',)`, `('1995-05-13',)` | Value Statics: Total count 100000 - Distinct count 2153 - Null count 0   
+);
+
+CREATE TABLE account
+(
+	foreign key (district_id) references district (district_id),
+	frequency TEXT not null, -- Example Values: `POPLATEK MESICNE`, `POPLATEK TYDNE`, `POPLATEK PO OBRATU` | Value Statics: Total count 4500 - Distinct count 3 - Null count 0   
+	account_id INTEGER default 0 not null primary key,
+	district_id INTEGER default 0 not null, -- Example Values: `(18,)`, `(1,)`, `(5,)` | Value Statics: Total count 4500 - Distinct count 77 - Null count 0   
+	date DATE not null, -- Example Values: `('1995-03-24',)`, `('1993-02-26',)`, `('1997-07-07',)` | Value Statics: Total count 4500 - Distinct count 1535 - Null count 0   
+);
+
+**************************

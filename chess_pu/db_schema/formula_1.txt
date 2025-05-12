@@ -1,0 +1,169 @@
+【Table creation statements】
+CREATE TABLE lapTimes
+(
+	primary key (raceId, driverId, lap),
+	position INTEGER, -- Example Values: `(13,)`, `(12,)`, `(11,)` | Value Statics: Total count 100000 - Distinct count 22 - Null count 0   
+	foreign key (raceId) references races(raceId),
+	driverId INTEGER not null, -- Example Values: `(1,)`, `(2,)`, `(3,)` | Value Statics: Total count 100000 - Distinct count 51 - Null count 0   
+	raceId INTEGER not null, -- Example Values: `(1,)`, `(2,)`, `(3,)` | Value Statics: Total count 100000 - Distinct count 94 - Null count 0   
+	foreign key (driverId) references drivers(driverId),
+	time TEXT, -- Example Values: `('1:49.088',)`, `('1:33.740',)`, `('1:31.600',)` | Value Statics: Total count 100000 - Distinct count 39226 - Null count 0   
+	lap INTEGER not null, -- Example Values: `(1,)`, `(2,)`, `(3,)` | Value Statics: Total count 100000 - Distinct count 78 - Null count 0   
+	milliseconds INTEGER, -- Example Values: `(109088,)`, `(93740,)`, `(91600,)` | Value Statics: Total count 100000 - Distinct count 39226 - Null count 0   
+);
+
+CREATE TABLE results
+(
+	foreign key (statusId) references status(statusId),
+	time TEXT, -- Example Values: `('1:34:50.616',)`, `('+5.478',)`, `('+8.163',)` | Value Statics: Total count 5961 - Distinct count 5755 - Null count 17696   
+	laps INTEGER default 0 not null, -- Example Values: `(58,)`, `(57,)`, `(55,)` | Value Statics: Total count 23657 - Distinct count 172 - Null count 0   
+	fastestLapTime TEXT, -- Example Values: `('1:27.452',)`, `('1:27.739',)`, `('1:28.090',)` | Value Statics: Total count 5268 - Distinct count 4955 - Null count 18389   
+	constructorId INTEGER default 0 not null, -- Example Values: `(1,)`, `(2,)`, `(3,)` | Value Statics: Total count 23657 - Distinct count 207 - Null count 0   
+	fastestLap INTEGER, -- Example Values: `(39,)`, `(41,)`, `(58,)` | Value Statics: Total count 5268 - Distinct count 77 - Null count 18389 | Column Name Meaning: fastest lap | Column Description: fastest lap number 
+	foreign key (raceId) references races(raceId),
+	number INTEGER, -- Example Values: `(22,)`, `(3,)`, `(7,)` | Value Statics: Total count 23651 - Distinct count 128 - Null count 6   
+	positionText TEXT default '' not null, -- Example Values: `('1',)`, `('2',)`, `('3',)` | Value Statics: Total count 23657 - Distinct count 39 - Null count 0   
+	fastestLapSpeed TEXT, -- Example Values: `('218.300',)`, `('217.586',)`, `('216.719',)` | Value Statics: Total count 5268 - Distinct count 5045 - Null count 18389   
+	grid INTEGER default 0 not null, -- Example Values: `(1,)`, `(5,)`, `(7,)` | Value Statics: Total count 23657 - Distinct count 35 - Null count 0   
+	foreign key (constructorId) references constructors(constructorId),
+	raceId INTEGER default 0 not null, -- Example Values: `(18,)`, `(19,)`, `(20,)` | Value Statics: Total count 23657 - Distinct count 970 - Null count 0   
+	statusId INTEGER default 0 not null, -- Example Values: `(1,)`, `(11,)`, `(5,)` | Value Statics: Total count 23657 - Distinct count 132 - Null count 0   
+	foreign key (driverId) references drivers(driverId),
+	position INTEGER, -- Example Values: `(1,)`, `(2,)`, `(3,)` | Value Statics: Total count 13129 - Distinct count 33 - Null count 10528   
+	milliseconds INTEGER, -- Example Values: `(5690616,)`, `(5696094,)`, `(5698779,)` | Value Statics: Total count 5960 - Distinct count 5923 - Null count 17697   
+	positionOrder INTEGER default 0 not null, -- Example Values: `(1,)`, `(2,)`, `(3,)` | Value Statics: Total count 23657 - Distinct count 39 - Null count 0 | Column Name Meaning: position order | Column Description: the finishing order of positions 
+	driverId INTEGER default 0 not null, -- Example Values: `(1,)`, `(2,)`, `(3,)` | Value Statics: Total count 23657 - Distinct count 840 - Null count 0   
+	rank INTEGER default 0, -- Example Values: `(2,)`, `(3,)`, `(5,)` | Value Statics: Total count 5411 - Distinct count 25 - Null count 18246  | Column Description: starting rank positioned by fastest lap speed 
+	resultId INTEGER primary key autoincrement,
+	points REAL default 0 not null, -- Example Values: `(10.0,)`, `(8.0,)`, `(6.0,)` | Value Statics: Total count 23657 - Distinct count 33 - Null count 0   
+);
+
+CREATE TABLE constructors
+(
+	constructorId INTEGER primary key autoincrement,
+	nationality TEXT, -- Example Values: `('British',)`, `('German',)`, `('French',)` | Value Statics: Total count 208 - Distinct count 24 - Null count 0   
+	url TEXT default '' not null, -- Example Values: `('http://en.wikipedia.org/wiki/McLaren',)`, `('http://en.wikipedia.org/wiki/BMW_Sauber',)`, `('http://en.wikipedia.org/wiki/Williams_Grand_Prix_Engineering',)` | Value Statics: Total count 208 - Distinct count 171 - Null count 0   
+	name TEXT default '' not null unique, -- Example Values: `('AFM',)`, `('AGS',)`, `('ATS',)` | Value Statics: Total count 208 - Distinct count 208 - Null count 0   
+	constructorRef TEXT default '' not null, -- Example Values: `('mclaren',)`, `('bmw_sauber',)`, `('williams',)` | Value Statics: Total count 208 - Distinct count 208 - Null count 0   
+);
+
+CREATE TABLE races
+(
+	time TEXT, -- Example Values: `('06:00:00',)`, `('09:00:00',)`, `('07:00:00',)` | Value Statics: Total count 245 - Distinct count 20 - Null count 731  | Column Description: time of the location 
+	foreign key (year) references seasons(year),
+	year INTEGER default 0 not null, -- Example Values: `(2009,)`, `(2008,)`, `(2007,)` | Value Statics: Total count 976 - Distinct count 68 - Null count 0   
+	round INTEGER default 0 not null, -- Example Values: `(1,)`, `(2,)`, `(3,)` | Value Statics: Total count 976 - Distinct count 21 - Null count 0   
+	circuitId INTEGER default 0 not null, -- Example Values: `(1,)`, `(2,)`, `(17,)` | Value Statics: Total count 976 - Distinct count 72 - Null count 0   
+	raceId INTEGER primary key autoincrement,
+	date DATE default '0000-00-00' not null, -- Example Values: `('2009-03-29',)`, `('2009-04-05',)`, `('2009-04-19',)` | Value Statics: Total count 976 - Distinct count 976 - Null count 0   
+	url TEXT unique, --  
+	foreign key (circuitId) references circuits(circuitId),
+	name TEXT default '' not null, -- Example Values: `Abu Dhabi Grand Prix` | Value Statics: Total count 976 - Distinct count 42 - Null count 0   
+);
+
+CREATE TABLE drivers
+(
+	dob DATE, -- Example Values: `('1985-01-07',)`, `('1977-05-10',)`, `('1985-06-27',)` | Value Statics: Total count 839 - Distinct count 821 - Null count 1   
+	driverRef TEXT default '' not null, -- Example Values: `('hamilton',)`, `('heidfeld',)`, `('rosberg',)` | Value Statics: Total count 840 - Distinct count 840 - Null count 0   
+	surname TEXT default '' not null, -- Example Values: `('Hamilton',)`, `('Heidfeld',)`, `('Rosberg',)` | Value Statics: Total count 840 - Distinct count 784 - Null count 0   
+	forename TEXT default '' not null, -- Example Values: `('Lewis',)`, `('Nick',)`, `('Nico',)` | Value Statics: Total count 840 - Distinct count 465 - Null count 0   
+	nationality TEXT, -- Example Values: `('British',)`, `('German',)`, `('Spanish',)` | Value Statics: Total count 840 - Distinct count 41 - Null count 0   
+	url TEXT default '' not null unique, -- Example Values: `('',)`, `('http://en.wikipedia.org/wiki/%C3%89lie_Bayol',)`, `('http://en.wikipedia.org/wiki/%C3%89ric_Bernard',)` | Value Statics: Total count 840 - Distinct count 840 - Null count 0   
+	number INTEGER, -- Example Values: `(44,)`, `(6,)`, `(14,)` | Value Statics: Total count 36 - Distinct count 36 - Null count 804   
+	code TEXT, -- Example Values: `('HAM',)`, `('HEI',)`, `('ROS',)` | Value Statics: Total count 83 - Distinct count 80 - Null count 757   
+	driverId INTEGER primary key autoincrement,
+);
+
+CREATE TABLE driverStandings
+(
+	wins INTEGER default 0 not null, -- Example Values: `1`, `0`, `2`, `3`, `4` | Value Statics: Total count 31578 - Distinct count 14 - Null count 0   
+	points REAL default 0 not null, -- Example Values: `(10.0,)`, `(8.0,)`, `(6.0,)` | Value Statics: Total count 31578 - Distinct count 337 - Null count 0   
+	foreign key (driverId) references drivers(driverId),
+	driverStandingsId INTEGER primary key autoincrement,
+	position INTEGER, -- Example Values: `(1,)`, `(2,)`, `(3,)` | Value Statics: Total count 31578 - Distinct count 108 - Null count 0   
+	driverId INTEGER default 0 not null, -- Example Values: `(1,)`, `(2,)`, `(3,)` | Value Statics: Total count 31578 - Distinct count 833 - Null count 0   
+	raceId INTEGER default 0 not null, -- Example Values: `(18,)`, `(19,)`, `(20,)` | Value Statics: Total count 31578 - Distinct count 970 - Null count 0   
+	positionText TEXT, -- Example Values: `('1',)`, `('2',)`, `('3',)` | Value Statics: Total count 31578 - Distinct count 109 - Null count 0 | Column Name Meaning: position text  | Value Description: same with position, not quite useful
+	foreign key (raceId) references races(raceId),
+);
+
+CREATE TABLE qualifying
+(
+	q2 TEXT, -- Example Values: `('1:25.187',)`, `('1:25.315',)`, `('1:25.452',)` | Value Statics: Total count 3590 - Distinct count 3403 - Null count 3807   
+	foreign key (constructorId) references constructors(constructorId),
+	foreign key (raceId) references races(raceId),
+	qualifyId INTEGER primary key autoincrement,
+	constructorId INTEGER default 0 not null, -- Example Values: `(1,)`, `(2,)`, `(6,)` | Value Statics: Total count 7397 - Distinct count 41 - Null count 0   
+	foreign key (driverId) references drivers(driverId),
+	q1 TEXT, -- Example Values: `('1:26.572',)`, `('1:26.103',)`, `('1:25.664',)` | Value Statics: Total count 7280 - Distinct count 6635 - Null count 117   
+	q3 TEXT, -- Example Values: `('1:26.714',)`, `('1:26.869',)`, `('1:27.079',)` | Value Statics: Total count 2146 - Distinct count 2066 - Null count 5251   
+	number INTEGER default 0 not null, -- Example Values: `(22,)`, `(4,)`, `(23,)` | Value Statics: Total count 7397 - Distinct count 48 - Null count 0   
+	driverId INTEGER default 0 not null, -- Example Values: `(1,)`, `(9,)`, `(5,)` | Value Statics: Total count 7397 - Distinct count 151 - Null count 0   
+	position INTEGER, -- Example Values: `(1,)`, `(2,)`, `(3,)` | Value Statics: Total count 7397 - Distinct count 28 - Null count 0   
+	raceId INTEGER default 0 not null, -- Example Values: `(18,)`, `(19,)`, `(20,)` | Value Statics: Total count 7397 - Distinct count 339 - Null count 0   
+);
+
+CREATE TABLE constructorStandings
+(
+	foreign key (constructorId) references constructors(constructorId),
+	constructorId INTEGER default 0 not null, -- Example Values: `(1,)`, `(2,)`, `(3,)` | Value Statics: Total count 11836 - Distinct count 156 - Null count 0   
+	wins INTEGER default 0 not null, -- Example Values: `(1,)`, `(0,)`, `(2,)` | Value Statics: Total count 11836 - Distinct count 20 - Null count 0   
+	constructorStandingsId INTEGER primary key autoincrement,
+	positionText TEXT, -- Example Values: `('1',)`, `('3',)`, `('2',)` | Value Statics: Total count 11836 - Distinct count 23 - Null count 0 | Column Name Meaning: position text  | Value Description: same with position, not quite useful
+	raceId INTEGER default 0 not null, -- Example Values: `(18,)`, `(19,)`, `(20,)` | Value Statics: Total count 11836 - Distinct count 906 - Null count 0   
+	position INTEGER, -- Example Values: `(1,)`, `(3,)`, `(2,)` | Value Statics: Total count 11836 - Distinct count 22 - Null count 0   
+	foreign key (raceId) references races(raceId),
+	points REAL default 0 not null, -- Example Values: `(14.0,)`, `(8.0,)`, `(9.0,)` | Value Statics: Total count 11836 - Distinct count 436 - Null count 0   
+);
+
+CREATE TABLE status
+(
+	statusId INTEGER primary key autoincrement,
+	status TEXT default '' not null, -- Example Values: `('Finished',)`, `('Disqualified',)`, `('Accident',)` | Value Statics: Total count 134 - Distinct count 134 - Null count 0   
+);
+
+CREATE TABLE constructorResults
+(
+	constructorResultsId INTEGER primary key autoincrement,
+	raceId INTEGER default 0 not null, -- Example Values: `(18,)`, `(19,)`, `(20,)` | Value Statics: Total count 11082 - Distinct count 907 - Null count 0   
+	constructorId INTEGER default 0 not null, -- Example Values: `(1,)`, `(2,)`, `(3,)` | Value Statics: Total count 11082 - Distinct count 172 - Null count 0   
+	foreign key (raceId) references races(raceId),
+	points REAL, -- Example Values: `(14.0,)`, `(8.0,)`, `(9.0,)` | Value Statics: Total count 11082 - Distinct count 45 - Null count 0   
+	foreign key (constructorId) references constructors(constructorId),
+	status TEXT, -- Example Values: `D` | Value Statics: Total count 17 - Distinct count 1 - Null count 11065   
+);
+
+CREATE TABLE circuits
+(
+	country TEXT, -- Example Values: `('Malaysia',)`, `('Bahrain',)`, `('Spain',)` | Value Statics: Total count 72 - Distinct count 32 - Null count 0   
+	circuitId INTEGER primary key autoincrement,
+	name TEXT default '' not null, -- Example Values: `('Sepang International Circuit',)`, `('Bahrain International Circuit',)`, `('Circuit de Barcelona-Catalunya',)` | Value Statics: Total count 72 - Distinct count 72 - Null count 0   
+	location TEXT, -- Example Values: `Abu Dhabi` | Value Statics: Total count 72 - Distinct count 69 - Null count 0   
+	lat REAL, -- Example Values: `(2.76083,)`, `(26.0325,)`, `(41.57,)` | Value Statics: Total count 72 - Distinct count 71 - Null count 0 | Column Name Meaning: latitude | Column Description: latitude of location of circuit 
+	alt INTEGER, --  
+	lng REAL, -- Example Values: `(101.738,)`, `(50.5106,)`, `(2.26111,)` | Value Statics: Total count 72 - Distinct count 71 - Null count 0 | Column Name Meaning: longitude | Column Description: longitude of location of circuit | Value Description: Location coordinates: (lat, lng)
+	circuitRef TEXT default '' not null, -- Example Values: `('sepang',)`, `('bahrain',)`, `('catalunya',)` | Value Statics: Total count 72 - Distinct count 72 - Null count 0   
+	url TEXT default '' not null unique, -- Example Values: `('http://en.wikipedia.org/wiki/A1-Ring',)`, `('http://en.wikipedia.org/wiki/AVUS',)`, `('http://en.wikipedia.org/wiki/Adelaide_Street_Circuit',)` | Value Statics: Total count 72 - Distinct count 72 - Null count 0   
+);
+
+CREATE TABLE pitStops
+(
+	foreign key (raceId) references races(raceId),
+	driverId INTEGER not null, -- Example Values: `(1,)`, `(2,)`, `(3,)` | Value Statics: Total count 6070 - Distinct count 54 - Null count 0   
+	stop INTEGER not null, -- Example Values: `1`, `2`, `3`, `4`, `5` | Value Statics: Total count 6070 - Distinct count 6 - Null count 0   
+	foreign key (driverId) references drivers(driverId),
+	duration TEXT, -- Example Values: `('23.227',)`, `('23.199',)`, `('22.994',)` | Value Statics: Total count 6070 - Distinct count 4713 - Null count 0   
+	raceId INTEGER not null, -- Example Values: `(841,)`, `(842,)`, `(843,)` | Value Statics: Total count 6070 - Distinct count 131 - Null count 0   
+	milliseconds INTEGER, -- Example Values: `(23227,)`, `(23199,)`, `(22994,)` | Value Statics: Total count 6070 - Distinct count 4713 - Null count 0   
+	lap INTEGER not null, -- Example Values: `(16,)`, `(36,)`, `(15,)` | Value Statics: Total count 6070 - Distinct count 73 - Null count 0   
+	primary key (raceId, driverId, stop),
+	time TEXT not null, -- Example Values: `('17:28:24',)`, `('17:59:29',)`, `('17:27:41',)` | Value Statics: Total count 6070 - Distinct count 4872 - Null count 0   
+);
+
+CREATE TABLE seasons
+(
+	year INTEGER default 0 not null primary key,
+	url TEXT default '' not null unique, --  
+);
+
+**************************

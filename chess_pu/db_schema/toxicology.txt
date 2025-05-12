@@ -1,0 +1,38 @@
+【Table creation statements】
+CREATE TABLE connected
+(
+	`atom_id2` TEXT NOT NULL, -- Example Values: `('TR000_2',)`, `('TR000_1',)`, `('TR000_3',)` | Value Statics: Total count 24758 - Distinct count 12284 - Null count 0   
+	FOREIGN KEY (`bond_id`) REFERENCES `bond` (`bond_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY (`atom_id`) REFERENCES `atom` (`atom_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+	`atom_id` TEXT NOT NULL, -- Example Values: `('TR000_1',)`, `('TR000_2',)`, `('TR000_3',)` | Value Statics: Total count 24758 - Distinct count 12284 - Null count 0   
+	FOREIGN KEY (`atom_id2`) REFERENCES `atom` (`atom_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+	`bond_id` TEXT DEFAULT NULL, -- Example Values: `('TR000_1_2',)`, `('TR000_2_3',)`, `('TR000_2_4',)` | Value Statics: Total count 24758 - Distinct count 12379 - Null count 0 | Column Name Meaning: bond id | Column Description: bond id representing bond between two atoms 
+	PRIMARY KEY (`atom_id`,`atom_id2`),
+);
+
+CREATE TABLE molecule
+(
+	`molecule_id` TEXT NOT NULL, -- Example Values: `('TR000',)`, `('TR001',)`, `('TR002',)` | Value Statics: Total count 343 - Distinct count 343 - Null count 0 | Column Name Meaning: molecule id | Column Description: unique id of molecule | Value Description: "+" --> this molecule / compound is carcinogenic '-' this molecule is not / compound carcinogenic
+	`label` TEXT DEFAULT NULL, -- Example Values: `+`, `-` | Value Statics: Total count 343 - Distinct count 2 - Null count 0  | Column Description: whether this molecule is carcinogenic or not 
+	PRIMARY KEY (`molecule_id`),
+);
+
+CREATE TABLE bond
+(
+	FOREIGN KEY (`molecule_id`) REFERENCES `molecule` (`molecule_id`),
+	PRIMARY KEY (`bond_id`),
+	`bond_id` TEXT NOT NULL, -- Example Values: `('TR000_1_2',)`, `('TR000_2_3',)`, `('TR000_2_4',)` | Value Statics: Total count 12379 - Distinct count 12379 - Null count 0  | Column Description: unique id representing bonds | Value Description: TRxxx_A1_A2: TRXXX refers to which molecule A1 and A2 refers to which atom
+	`molecule_id` TEXT DEFAULT NULL, -- Example Values: `('TR000',)`, `('TR001',)`, `('TR002',)` | Value Statics: Total count 12379 - Distinct count 444 - Null count 0  | Column Description: identifying the molecule in which the bond appears 
+	`bond_type` TEXT DEFAULT NULL, -- Example Values: `-` | Value Statics: Total count 12378 - Distinct count 3 - Null count 1  | Column Description: type of the bond | Value Description: -: single bond '=': double bond '#': triple bond
+);
+
+CREATE TABLE atom
+(
+	`molecule_id` TEXT DEFAULT NULL, -- Example Values: `('TR000',)`, `('TR001',)`, `('TR002',)` | Value Statics: Total count 12333 - Distinct count 444 - Null count 0 | Column Name Meaning: molecule id | Column Description: identifying the molecule to which the atom belongs | Value Description: TRXXX_i represents ith atom of molecule TRXXX
+	FOREIGN KEY (`molecule_id`) REFERENCES `molecule` (`molecule_id`),
+	`element` TEXT DEFAULT NULL, -- Example Values: `('cl',)`, `('c',)`, `('h',)` | Value Statics: Total count 12333 - Distinct count 21 - Null count 0   
+	PRIMARY KEY (`atom_id`),
+	`atom_id` TEXT NOT NULL, -- Example Values: `('TR000_1',)`, `('TR000_2',)`, `('TR000_3',)` | Value Statics: Total count 12333 - Distinct count 12333 - Null count 0   
+);
+
+**************************

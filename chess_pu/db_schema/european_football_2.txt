@@ -1,0 +1,234 @@
+【Table creation statements】
+CREATE TABLE Team_Attributes
+(
+	`team_api_id` INTEGER, -- Example Values: `(9930,)`, `(8485,)`, `(8576,)` | Value Statics: Total count 1458 - Distinct count 288 - Null count 0 | Column Name Meaning: team api id | Column Description: the id of the team api 
+	`defenceAggressionClass` TEXT, -- Example Values: `Press`, `Double`, `Contain` | Value Statics: Total count 1458 - Distinct count 3 - Null count 0   
+	`buildUpPlayPassingClass` TEXT, -- Example Values: `Mixed`, `Long`, `Short` | Value Statics: Total count 1458 - Distinct count 3 - Null count 0 | Column Name Meaning: build Up Play Passing Class | Column Description: the passing class | Value Description: commonsense reasoning:  • Short: 1-33 • Mixed: 34-66 • Long: 66-100
+	`defencePressureClass` TEXT, -- Example Values: `Medium`, `Deep`, `High` | Value Statics: Total count 1458 - Distinct count 3 - Null count 0   
+	`chanceCreationPassingClass` TEXT, -- Example Values: `Normal`, `Risky`, `Safe` | Value Statics: Total count 1458 - Distinct count 3 - Null count 0   
+	`defenceAggression` INTEGER, -- Example Values: `(55,)`, `(44,)`, `(70,)` | Value Statics: Total count 1458 - Distinct count 47 - Null count 0   
+	`buildUpPlaySpeedClass` TEXT, -- Example Values: `Balanced`, `Fast`, `Slow` | Value Statics: Total count 1458 - Distinct count 3 - Null count 0 | Column Name Meaning: build Up Play Speed Class | Column Description: the speed class | Value Description: commonsense reasoning:  • Slow: 1-33 • Balanced: 34-66 • Fast: 66-100
+	`defencePressure` INTEGER, -- Example Values: `(50,)`, `(47,)`, `(60,)` | Value Statics: Total count 1458 - Distinct count 48 - Null count 0   
+	`defenceTeamWidthClass` TEXT, -- Example Values: `Normal`, `Wide`, `Narrow` | Value Statics: Total count 1458 - Distinct count 3 - Null count 0   
+	`id` INTEGER PRIMARY KEY AUTOINCREMENT,
+	FOREIGN KEY(`team_api_id`) REFERENCES `Team`(`team_api_id`),
+	`buildUpPlayDribbling` INTEGER, -- Example Values: `(48,)`, `(41,)`, `(64,)` | Value Statics: Total count 489 - Distinct count 49 - Null count 969 | Column Name Meaning: build Up Play Dribbling | Column Description: the tendency/ frequency of dribbling 
+	`chanceCreationPositioningClass` TEXT, -- Example Values: `Organised`, `Free Form` | Value Statics: Total count 1458 - Distinct count 2 - Null count 0   
+	`chanceCreationShooting` INTEGER, -- Example Values: `(55,)`, `(64,)`, `(70,)` | Value Statics: Total count 1458 - Distinct count 57 - Null count 0   
+	`buildUpPlayPassing` INTEGER, -- Example Values: `(50,)`, `(56,)`, `(54,)` | Value Statics: Total count 1458 - Distinct count 58 - Null count 0 | Column Name Meaning: build Up Play Passing | Column Description: affects passing distance and support from teammates 
+	FOREIGN KEY(`team_fifa_api_id`) REFERENCES `Team`(`team_fifa_api_id`),
+	`chanceCreationCrossing` INTEGER, -- Example Values: `(65,)`, `(63,)`, `(70,)` | Value Statics: Total count 1458 - Distinct count 56 - Null count 0   
+	`date` TEXT, -- Example Values: `('2010-02-22 00:00:00',)`, `('2014-09-19 00:00:00',)`, `('2015-09-10 00:00:00',)` | Value Statics: Total count 1458 - Distinct count 6 - Null count 0   
+	`buildUpPlayDribblingClass` TEXT, -- Example Values: `Little`, `Normal`, `Lots` | Value Statics: Total count 1458 - Distinct count 3 - Null count 0   
+	`buildUpPlaySpeed` INTEGER, -- Example Values: `(60,)`, `(52,)`, `(47,)` | Value Statics: Total count 1458 - Distinct count 57 - Null count 0 | Column Name Meaning: build Up Play Speed | Column Description: the speed in which attacks are put together | Value Description: the score which is between 1-00 to measure the team's attack speed
+	`buildUpPlayPositioningClass` TEXT, -- Example Values: `Organised`, `Free Form` | Value Statics: Total count 1458 - Distinct count 2 - Null count 0   
+	`chanceCreationShootingClass` TEXT, -- Example Values: `Normal`, `Lots`, `Little` | Value Statics: Total count 1458 - Distinct count 3 - Null count 0   
+	`chanceCreationPassing` INTEGER, -- Example Values: `(60,)`, `(54,)`, `(70,)` | Value Statics: Total count 1458 - Distinct count 50 - Null count 0   
+	`team_fifa_api_id` INTEGER, -- Example Values: `(434,)`, `(77,)`, `(614,)` | Value Statics: Total count 1458 - Distinct count 285 - Null count 0 | Column Name Meaning: team federation international football association api id | Column Description: the id of the team fifa api 
+	`defenceDefenderLineClass` TEXT, -- Example Values: `Cover`, `Offside Trap` | Value Statics: Total count 1458 - Distinct count 2 - Null count 0   
+	`defenceTeamWidth` INTEGER, -- Example Values: `(45,)`, `(54,)`, `(70,)` | Value Statics: Total count 1458 - Distinct count 43 - Null count 0   
+	`chanceCreationCrossingClass` TEXT, -- Example Values: `Normal`, `Lots`, `Little` | Value Statics: Total count 1458 - Distinct count 3 - Null count 0   
+);
+
+CREATE TABLE Player_Attributes
+(
+	`free_kick_accuracy` INTEGER, -- Example Values: `(39,)`, `(38,)`, `(69,)` | Value Statics: Total count 99587 - Distinct count 95 - Null count 413   
+	FOREIGN KEY(`player_fifa_api_id`) REFERENCES `Player`(`player_fifa_api_id`),
+	`volleys` INTEGER, -- Example Values: `(44,)`, `(43,)`, `(40,)` | Value Statics: Total count 98569 - Distinct count 90 - Null count 1431   
+	`long_shots` INTEGER, -- Example Values: `(35,)`, `(34,)`, `(62,)` | Value Statics: Total count 99587 - Distinct count 95 - Null count 413   
+	`gk_handling` INTEGER, -- Example Values: `(11,)`, `(10,)`, `(7,)` | Value Statics: Total count 99587 - Distinct count 87 - Null count 413   
+	`penalties` INTEGER, -- Example Values: `(48,)`, `(47,)`, `(59,)` | Value Statics: Total count 99587 - Distinct count 93 - Null count 413   
+	`date` TEXT, -- Example Values: `('2016-02-18 00:00:00',)`, `('2015-11-19 00:00:00',)`, `('2015-09-21 00:00:00',)` | Value Statics: Total count 100000 - Distinct count 195 - Null count 0   
+	`shot_power` INTEGER, -- Example Values: `(55,)`, `(54,)`, `(71,)` | Value Statics: Total count 99587 - Distinct count 95 - Null count 413   
+	`aggression` INTEGER, -- Example Values: `(71,)`, `(63,)`, `(62,)` | Value Statics: Total count 99587 - Distinct count 90 - Null count 413   
+	`acceleration` INTEGER, -- Example Values: `(60,)`, `(79,)`, `(80,)` | Value Statics: Total count 99587 - Distinct count 83 - Null count 413   
+	`defensive_work_rate` TEXT, -- Example Values: `('medium',)`, `('high',)`, `('low',)` | Value Statics: Total count 99587 - Distinct count 19 - Null count 413   
+	`vision` INTEGER, -- Example Values: `(54,)`, `(53,)`, `(66,)` | Value Statics: Total count 98569 - Distinct count 96 - Null count 1431   
+	`reactions` INTEGER, -- Example Values: `(47,)`, `(46,)`, `(67,)` | Value Statics: Total count 99587 - Distinct count 77 - Null count 413   
+	`crossing` INTEGER, -- Example Values: `(49,)`, `(48,)`, `(80,)` | Value Statics: Total count 99587 - Distinct count 94 - Null count 413   
+	`preferred_foot` TEXT, -- Example Values: `right`, `left` | Value Statics: Total count 99587 - Distinct count 2 - Null count 413   
+	`strength` INTEGER, -- Example Values: `(76,)`, `(56,)`, `(50,)` | Value Statics: Total count 99587 - Distinct count 79 - Null count 413   
+	`long_passing` INTEGER, -- Example Values: `(64,)`, `(63,)`, `(68,)` | Value Statics: Total count 99587 - Distinct count 95 - Null count 413   
+	`overall_rating` INTEGER, -- Example Values: `(67,)`, `(62,)`, `(61,)` | Value Statics: Total count 99587 - Distinct count 60 - Null count 413   
+	`gk_reflexes` INTEGER, -- Example Values: `(8,)`, `(7,)`, `(12,)` | Value Statics: Total count 99587 - Distinct count 91 - Null count 413   
+	`gk_kicking` INTEGER, -- Example Values: `(10,)`, `(9,)`, `(8,)` | Value Statics: Total count 99587 - Distinct count 97 - Null count 413   
+	`curve` INTEGER, -- Example Values: `(45,)`, `(44,)`, `(70,)` | Value Statics: Total count 98569 - Distinct count 92 - Null count 1431   
+	`sliding_tackle` INTEGER, -- Example Values: `(69,)`, `(66,)`, `(78,)` | Value Statics: Total count 98569 - Distinct count 91 - Null count 1431   
+	`gk_diving` INTEGER, -- Example Values: `(6,)`, `(5,)`, `(14,)` | Value Statics: Total count 99587 - Distinct count 89 - Null count 413   
+	`agility` INTEGER, -- Example Values: `(59,)`, `(78,)`, `(79,)` | Value Statics: Total count 98569 - Distinct count 80 - Null count 1431   
+	`potential` INTEGER, -- Example Values: `(71,)`, `(66,)`, `(65,)` | Value Statics: Total count 99587 - Distinct count 53 - Null count 413   
+	`gk_positioning` INTEGER, -- Example Values: `(8,)`, `(7,)`, `(9,)` | Value Statics: Total count 99587 - Distinct count 90 - Null count 413   
+	`player_fifa_api_id` INTEGER, -- Example Values: `(218353,)`, `(189615,)`, `(186170,)` | Value Statics: Total count 100000 - Distinct count 6026 - Null count 0 | Column Name Meaning: player federation international football association api id | Column Description: the id of the player fifa api 
+	`ball_control` INTEGER, -- Example Values: `(49,)`, `(48,)`, `(71,)` | Value Statics: Total count 99587 - Distinct count 90 - Null count 413   
+	`positioning` INTEGER, -- Example Values: `(45,)`, `(44,)`, `(60,)` | Value Statics: Total count 99587 - Distinct count 94 - Null count 413   
+	`marking` INTEGER, -- Example Values: `(65,)`, `(62,)`, `(76,)` | Value Statics: Total count 99587 - Distinct count 95 - Null count 413   
+	`standing_tackle` INTEGER, -- Example Values: `(69,)`, `(66,)`, `(63,)` | Value Statics: Total count 99587 - Distinct count 93 - Null count 413   
+	FOREIGN KEY(`player_api_id`) REFERENCES `Player`(`player_api_id`),
+	`heading_accuracy` INTEGER, -- Example Values: `(71,)`, `(70,)`, `(58,)` | Value Statics: Total count 99587 - Distinct count 95 - Null count 413   
+	`player_api_id` INTEGER, -- Example Values: `(505942,)`, `(155782,)`, `(162549,)` | Value Statics: Total count 100000 - Distinct count 6024 - Null count 0   
+	`finishing` INTEGER, -- Example Values: `(44,)`, `(43,)`, `(53,)` | Value Statics: Total count 99587 - Distinct count 95 - Null count 413   
+	`id` INTEGER PRIMARY KEY AUTOINCREMENT,
+	`dribbling` INTEGER, -- Example Values: `(51,)`, `(50,)`, `(73,)` | Value Statics: Total count 99587 - Distinct count 95 - Null count 413   
+	`jumping` INTEGER, -- Example Values: `(58,)`, `(85,)`, `(84,)` | Value Statics: Total count 98569 - Distinct count 77 - Null count 1431   
+	`stamina` INTEGER, -- Example Values: `(54,)`, `(79,)`, `(80,)` | Value Statics: Total count 99587 - Distinct count 80 - Null count 413   
+	`balance` INTEGER, -- Example Values: `(65,)`, `(90,)`, `(87,)` | Value Statics: Total count 98569 - Distinct count 81 - Null count 1431   
+	`interceptions` INTEGER, -- Example Values: `(70,)`, `(41,)`, `(40,)` | Value Statics: Total count 99587 - Distinct count 93 - Null count 413   
+	`short_passing` INTEGER, -- Example Values: `(61,)`, `(60,)`, `(71,)` | Value Statics: Total count 99587 - Distinct count 93 - Null count 413   
+	`attacking_work_rate` TEXT, -- Example Values: `medium`, `high`, `low`, `None`, `le` | Value Statics: Total count 98220 - Distinct count 8 - Null count 1780   
+	`sprint_speed` INTEGER, -- Example Values: `(64,)`, `(78,)`, `(82,)` | Value Statics: Total count 99587 - Distinct count 82 - Null count 413   
+);
+
+CREATE TABLE Team
+(
+	`team_short_name` TEXT, -- Example Values: `('GEN',)`, `('BAC',)`, `('ZUL',)` | Value Statics: Total count 299 - Distinct count 259 - Null count 0   
+	`id` INTEGER PRIMARY KEY AUTOINCREMENT,
+	`team_long_name` TEXT, -- Example Values: `('KRC Genk',)`, `('Beerschot AC',)`, `('SV Zulte-Waregem',)` | Value Statics: Total count 299 - Distinct count 296 - Null count 0   
+	`team_fifa_api_id` INTEGER, -- Example Values: `(673,)`, `(675,)`, `(15005,)` | Value Statics: Total count 288 - Distinct count 285 - Null count 11 | Column Name Meaning: team federation international football association api id | Column Description: the id of the team fifa api 
+	`team_api_id` INTEGER UNIQUE, -- Example Values: `(1601,)`, `(1773,)`, `(1957,)` | Value Statics: Total count 299 - Distinct count 299 - Null count 0 | Column Name Meaning: team api id | Column Description: the id of the team api 
+);
+
+CREATE TABLE League
+(
+	`id` INTEGER PRIMARY KEY AUTOINCREMENT,
+	FOREIGN KEY(`country_id`) REFERENCES `country`(`id`),
+	`name` TEXT UNIQUE, -- Example Values: `Belgium Jupiler League`, `England Premier League`, `France Ligue 1`, `Germany 1. Bundesliga`, `Italy Serie A` | Value Statics: Total count 11 - Distinct count 11 - Null count 0   
+	`country_id` INTEGER, -- Example Values: `1`, `1729`, `4769`, `7809`, `10257` | Value Statics: Total count 11 - Distinct count 11 - Null count 0   
+);
+
+CREATE TABLE Player
+(
+	`player_fifa_api_id` INTEGER UNIQUE, -- Example Values: `(2,)`, `(6,)`, `(11,)` | Value Statics: Total count 11060 - Distinct count 11060 - Null count 0 | Column Name Meaning: player federation international football association api id | Column Description: the id of the player fifa api 
+	`birthday` TEXT, -- Example Values: `('1992-02-29 00:00:00',)`, `('1989-12-15 00:00:00',)`, `('1991-05-13 00:00:00',)` | Value Statics: Total count 11060 - Distinct count 5762 - Null count 0   
+	`player_name` TEXT, -- Example Values: `('Aaron Appindangoye',)`, `('Aaron Cresswell',)`, `('Aaron Doran',)` | Value Statics: Total count 11060 - Distinct count 10848 - Null count 0   
+	`height` INTEGER, -- Example Values: `(182.88,)`, `(170.18,)`, `(172.72,)` | Value Statics: Total count 11060 - Distinct count 20 - Null count 0   
+	`id` INTEGER PRIMARY KEY AUTOINCREMENT,
+	`player_api_id` INTEGER UNIQUE, -- Example Values: `(2625,)`, `(2752,)`, `(2768,)` | Value Statics: Total count 11060 - Distinct count 11060 - Null count 0   
+	`weight` INTEGER, -- Example Values: `(187,)`, `(146,)`, `(163,)` | Value Statics: Total count 11060 - Distinct count 50 - Null count 0   
+);
+
+CREATE TABLE Country
+(
+	`name` TEXT UNIQUE, -- Example Values: `Belgium`, `England`, `France`, `Germany`, `Italy` | Value Statics: Total count 11 - Distinct count 11 - Null count 0   
+	`id` INTEGER PRIMARY KEY AUTOINCREMENT,
+);
+
+CREATE TABLE Match
+(
+	away_player_X9 INTEGER, -- Example Values: `8`, `2`, `6`, `4`, `3` | Value Statics: Total count 24146 - Distinct count 9 - Null count 1833   
+	away_player_X1 INTEGER, -- Example Values: `1`, `2`, `6` | Value Statics: Total count 24147 - Distinct count 3 - Null count 1832   
+	home_player_Y10 INTEGER, -- Example Values: `10`, `7`, `8`, `9`, `6` | Value Statics: Total count 24147 - Distinct count 7 - Null count 1832   
+	home_player_Y7 INTEGER, -- Example Values: `7`, `6`, `8`, `5`, `3` | Value Statics: Total count 24147 - Distinct count 6 - Null count 1832   
+	IWA REAL, -- Example Values: `(3.5,)`, `(2.3,)`, `(6.0,)` | Value Statics: Total count 22520 - Distinct count 159 - Null count 3459   
+	away_player_5 INTEGER references Player (player_api_id), -- Example Values: `(38389,)`, `(148314,)`, `(15652,)` | Value Statics: Total count 24644 - Distinct count 2884 - Null count 1335   
+	PSH REAL, -- Example Values: `(5.1,)`, `(2.48,)`, `(1.83,)` | Value Statics: Total count 11168 - Distinct count 948 - Null count 14811   
+	home_player_3 INTEGER references Player (player_api_id), -- Example Values: `(38788,)`, `(67958,)`, `(30692,)` | Value Statics: Total count 24698 - Distinct count 2375 - Null count 1281   
+	WHD REAL, -- Example Values: `(3.3,)`, `(3.25,)`, `(3.75,)` | Value Statics: Total count 22571 - Distinct count 78 - Null count 3408   
+	away_player_Y2 INTEGER, -- Example Values: `3` | Value Statics: Total count 24147 - Distinct count 1 - Null count 1832   
+	season TEXT, -- Example Values: `2008/2009`, `2009/2010`, `2010/2011`, `2011/2012`, `2012/2013` | Value Statics: Total count 25979 - Distinct count 8 - Null count 0   
+	B365A REAL, -- Example Values: `(5.0,)`, `(3.6,)`, `(2.75,)` | Value Statics: Total count 22592 - Distinct count 115 - Null count 3387   
+	goal TEXT, --  
+	SJA REAL, -- Example Values: `(4.0,)`, `(3.8,)`, `(2.5,)` | Value Statics: Total count 17097 - Distinct count 132 - Null count 8882   
+	away_player_Y8 INTEGER, -- Example Values: `7`, `8`, `6`, `5`, `9` | Value Statics: Total count 24147 - Distinct count 7 - Null count 1832   
+	away_player_10 INTEGER references Player (player_api_id), -- Example Values: `(38383,)`, `(32690,)`, `(39158,)` | Value Statics: Total count 24538 - Distinct count 3891 - Null count 1441   
+	away_player_9 INTEGER references Player (player_api_id), -- Example Values: `(106013,)`, `(42153,)`, `(46881,)` | Value Statics: Total count 24651 - Distinct count 4319 - Null count 1328   
+	home_player_X5 INTEGER, -- Example Values: `8`, `6`, `2`, `7`, `1` | Value Statics: Total count 24147 - Distinct count 9 - Null count 1832   
+	home_player_Y5 INTEGER, -- Example Values: `3`, `7`, `6`, `5`, `8` | Value Statics: Total count 24147 - Distinct count 5 - Null count 1832   
+	home_player_X8 INTEGER, -- Example Values: `6`, `2`, `8`, `3`, `7` | Value Statics: Total count 24147 - Distinct count 9 - Null count 1832   
+	league_id INTEGER references League, -- Example Values: `1`, `1729`, `4769`, `7809`, `10257` | Value Statics: Total count 25979 - Distinct count 11 - Null count 0   
+	away_player_X7 INTEGER, -- Example Values: `4`, `6`, `5`, `3`, `7` | Value Statics: Total count 24147 - Distinct count 9 - Null count 1832   
+	home_player_11 INTEGER references Player (player_api_id), -- Example Values: `(94289,)`, `(26502,)`, `(38419,)` | Value Statics: Total count 24424 - Distinct count 2890 - Null count 1555   
+	away_player_Y6 INTEGER, -- Example Values: `7`, `3`, `6`, `8`, `5` | Value Statics: Total count 24147 - Distinct count 7 - Null count 1832   
+	BSA REAL, -- Example Values: `(4.2,)`, `(3.6,)`, `(2.75,)` | Value Statics: Total count 14161 - Distinct count 96 - Null count 11818   
+	home_player_Y8 INTEGER, -- Example Values: `7`, `8`, `6`, `5`, `3` | Value Statics: Total count 24147 - Distinct count 7 - Null count 1832   
+	away_player_2 INTEGER references Player (player_api_id), -- Example Values: `(38388,)`, `(38293,)`, `(39156,)` | Value Statics: Total count 24701 - Distinct count 2504 - Null count 1278   
+	home_player_Y2 INTEGER, -- Example Values: `3`, `0` | Value Statics: Total count 24158 - Distinct count 2 - Null count 1821   
+	home_player_5 INTEGER references Player (player_api_id), -- Example Values: `(26235,)`, `(37112,)`, `(94462,)` | Value Statics: Total count 24663 - Distinct count 2769 - Null count 1316   
+	away_player_4 INTEGER references Player (player_api_id), -- Example Values: `(13423,)`, `(104411,)`, `(166554,)` | Value Statics: Total count 24658 - Distinct count 2657 - Null count 1321   
+	BWD REAL, -- Example Values: `(3.35,)`, `(3.3,)`, `(4.0,)` | Value Statics: Total count 22575 - Distinct count 133 - Null count 3404   
+	home_player_4 INTEGER references Player (player_api_id), -- Example Values: `(38312,)`, `(67959,)`, `(38435,)` | Value Statics: Total count 24656 - Distinct count 2606 - Null count 1323   
+	home_player_2 INTEGER references Player (player_api_id), -- Example Values: `(67950,)`, `(39580,)`, `(38292,)` | Value Statics: Total count 24664 - Distinct count 2414 - Null count 1315   
+	home_player_1 INTEGER references Player (player_api_id), -- Example Values: `(39890,)`, `(38327,)`, `(95597,)` | Value Statics: Total count 24755 - Distinct count 906 - Null count 1224   
+	WHH REAL, -- Example Values: `(1.7,)`, `(1.83,)`, `(2.5,)` | Value Statics: Total count 22571 - Distinct count 125 - Null count 3408   
+	home_player_Y1 INTEGER, -- Example Values: `1`, `3`, `0` | Value Statics: Total count 24158 - Distinct count 3 - Null count 1821   
+	away_player_Y4 INTEGER, -- Example Values: `3`, `5`, `7` | Value Statics: Total count 24147 - Distinct count 3 - Null count 1832   
+	SJD REAL, -- Example Values: `(3.3,)`, `(4.0,)`, `(3.5,)` | Value Statics: Total count 17097 - Distinct count 79 - Null count 8882   
+	home_player_X11 INTEGER, -- Example Values: `6`, `4`, `5`, `7`, `3` | Value Statics: Total count 24147 - Distinct count 6 - Null count 1832   
+	BSH REAL, -- Example Values: `(1.73,)`, `(1.91,)`, `(2.3,)` | Value Statics: Total count 14161 - Distinct count 101 - Null count 11818   
+	home_player_6 INTEGER references Player (player_api_id), -- Example Values: `(36393,)`, `(46004,)`, `(119117,)` | Value Statics: Total count 24654 - Distinct count 3798 - Null count 1325   
+	away_player_Y11 INTEGER, -- Example Values: `10`, `11`, `8`, `7` | Value Statics: Total count 24140 - Distinct count 4 - Null count 1839   
+	home_player_X7 INTEGER, -- Example Values: `4`, `8`, `6`, `5`, `3` | Value Statics: Total count 24147 - Distinct count 9 - Null count 1832   
+	corner TEXT, --  
+	away_player_X11 INTEGER, -- Example Values: `6`, `4`, `3`, `7`, `5` | Value Statics: Total count 24140 - Distinct count 6 - Null count 1839   
+	LBD REAL, -- Example Values: `(3.3,)`, `(3.2,)`, `(3.6,)` | Value Statics: Total count 22556 - Distinct count 72 - Null count 3423   
+	VCA REAL, -- Example Values: `(4.5,)`, `(3.25,)`, `(2.65,)` | Value Statics: Total count 22568 - Distinct count 151 - Null count 3411   
+	away_player_X8 INTEGER, -- Example Values: `6`, `8`, `7`, `5`, `4` | Value Statics: Total count 24147 - Distinct count 9 - Null count 1832   
+	id INTEGER primary key autoincrement,
+	home_player_X9 INTEGER, -- Example Values: `8`, `4`, `2`, `6`, `7` | Value Statics: Total count 24147 - Distinct count 9 - Null count 1832   
+	away_player_Y7 INTEGER, -- Example Values: `7`, `6`, `8`, `5`, `3` | Value Statics: Total count 24147 - Distinct count 7 - Null count 1832   
+	country_id INTEGER references Country, -- Example Values: `1`, `1729`, `4769`, `7809`, `10257` | Value Statics: Total count 25979 - Distinct count 11 - Null count 0   
+	IWD REAL, -- Example Values: `(3.2,)`, `(3.1,)`, `(3.9,)` | Value Statics: Total count 22520 - Distinct count 73 - Null count 3459   
+	B365D REAL, -- Example Values: `(3.4,)`, `(3.2,)`, `(3.3,)` | Value Statics: Total count 22592 - Distinct count 72 - Null count 3387   
+	home_player_X3 INTEGER, -- Example Values: `4`, `6`, `8`, `5`, `3` | Value Statics: Total count 24147 - Distinct count 8 - Null count 1832   
+	home_player_Y4 INTEGER, -- Example Values: `3`, `5` | Value Statics: Total count 24147 - Distinct count 2 - Null count 1832   
+	away_player_X2 INTEGER, -- Example Values: `2`, `4`, `3`, `1`, `6` | Value Statics: Total count 24147 - Distinct count 8 - Null count 1832   
+	home_player_10 INTEGER references Player (player_api_id), -- Example Values: `(38801,)`, `(38423,)`, `(25957,)` | Value Statics: Total count 24543 - Distinct count 3642 - Null count 1436   
+	shoton TEXT, --  
+	home_player_8 INTEGER references Player (player_api_id), -- Example Values: `(67898,)`, `(39631,)`, `(95609,)` | Value Statics: Total count 24670 - Distinct count 4076 - Null count 1309   
+	home_player_7 INTEGER references Player (player_api_id), -- Example Values: `(148286,)`, `(164732,)`, `(35412,)` | Value Statics: Total count 24752 - Distinct count 3422 - Null count 1227   
+	away_player_Y9 INTEGER, -- Example Values: `7`, `10`, `8`, `9`, `6` | Value Statics: Total count 24146 - Distinct count 7 - Null count 1833   
+	away_player_3 INTEGER references Player (player_api_id), -- Example Values: `(26458,)`, `(148313,)`, `(39151,)` | Value Statics: Total count 24686 - Distinct count 2470 - Null count 1293   
+	away_player_X3 INTEGER, -- Example Values: `4`, `6`, `5`, `3`, `8` | Value Statics: Total count 24147 - Distinct count 8 - Null count 1832   
+	away_player_11 INTEGER references Player (player_api_id), -- Example Values: `(46552,)`, `(38782,)`, `(119118,)` | Value Statics: Total count 24425 - Distinct count 3040 - Null count 1554   
+	card TEXT, --  
+	away_player_X5 INTEGER, -- Example Values: `8`, `6`, `4`, `2`, `7` | Value Statics: Total count 24147 - Distinct count 9 - Null count 1832   
+	away_player_Y10 INTEGER, -- Example Values: `10`, `7`, `8`, `9`, `11` | Value Statics: Total count 24146 - Distinct count 6 - Null count 1833   
+	away_player_Y3 INTEGER, -- Example Values: `3`, `7` | Value Statics: Total count 24147 - Distinct count 2 - Null count 1832   
+	home_player_X4 INTEGER, -- Example Values: `6`, `8`, `4`, `7`, `5` | Value Statics: Total count 24147 - Distinct count 7 - Null count 1832   
+	home_team_goal INTEGER, -- Example Values: `1`, `0`, `5`, `2`, `4` | Value Statics: Total count 25979 - Distinct count 11 - Null count 0   
+	away_player_8 INTEGER references Player (player_api_id), -- Example Values: `(38253,)`, `(9307,)`, `(38947,)` | Value Statics: Total count 24638 - Distinct count 4249 - Null count 1341   
+	BWH REAL, -- Example Values: `(1.75,)`, `(1.8,)`, `(2.4,)` | Value Statics: Total count 22575 - Distinct count 237 - Null count 3404   
+	away_player_Y5 INTEGER, -- Example Values: `3`, `7`, `6`, `5`, `9` | Value Statics: Total count 24147 - Distinct count 5 - Null count 1832   
+	date TEXT, -- Example Values: `('2008-08-17 00:00:00',)`, `('2008-08-16 00:00:00',)`, `('2008-09-24 00:00:00',)` | Value Statics: Total count 25979 - Distinct count 1694 - Null count 0   
+	away_player_Y1 INTEGER, -- Example Values: `1`, `3` | Value Statics: Total count 24147 - Distinct count 2 - Null count 1832   
+	home_player_Y11 INTEGER, -- Example Values: `10`, `11`, `1`, `3` | Value Statics: Total count 24147 - Distinct count 4 - Null count 1832   
+	away_player_7 INTEGER references Player (player_api_id), -- Example Values: `(30949,)`, `(43158,)`, `(46890,)` | Value Statics: Total count 24744 - Distinct count 3620 - Null count 1235   
+	stage INTEGER, -- Example Values: `(1,)`, `(10,)`, `(11,)` | Value Statics: Total count 25979 - Distinct count 38 - Null count 0   
+	possession TEXT, --  
+	home_player_9 INTEGER references Player (player_api_id), -- Example Values: `(26916,)`, `(164352,)`, `(38246,)` | Value Statics: Total count 24706 - Distinct count 4114 - Null count 1273   
+	foulcommit TEXT, --  
+	home_team_api_id INTEGER references Team (team_api_id), -- Example Values: `(9987,)`, `(10000,)`, `(9984,)` | Value Statics: Total count 25979 - Distinct count 299 - Null count 0   
+	shotoff TEXT, --  
+	B365H REAL, -- Example Values: `(1.73,)`, `(1.95,)`, `(2.38,)` | Value Statics: Total count 22592 - Distinct count 121 - Null count 3387   
+	GBH REAL, -- Example Values: `(1.78,)`, `(1.85,)`, `(2.5,)` | Value Statics: Total count 14162 - Distinct count 159 - Null count 11817   
+	LBH REAL, -- Example Values: `(1.8,)`, `(1.9,)`, `(2.5,)` | Value Statics: Total count 22556 - Distinct count 129 - Null count 3423   
+	IWH REAL, -- Example Values: `(1.85,)`, `(1.9,)`, `(2.6,)` | Value Statics: Total count 22520 - Distinct count 147 - Null count 3459   
+	WHA REAL, -- Example Values: `(4.33,)`, `(3.6,)`, `(2.4,)` | Value Statics: Total count 22571 - Distinct count 136 - Null count 3408   
+	"cross" TEXT, --  
+	BSD REAL, -- Example Values: `(3.4,)`, `(3.25,)`, `(3.2,)` | Value Statics: Total count 14161 - Distinct count 59 - Null count 11818   
+	away_player_1 INTEGER references Player (player_api_id), -- Example Values: `(34480,)`, `(37937,)`, `(38252,)` | Value Statics: Total count 24745 - Distinct count 926 - Null count 1234   
+	VCD REAL, -- Example Values: `(3.4,)`, `(3.25,)`, `(3.75,)` | Value Statics: Total count 22568 - Distinct count 82 - Null count 3411   
+	home_player_X10 INTEGER, -- Example Values: `4`, `6`, `9`, `5`, `7` | Value Statics: Total count 24147 - Distinct count 9 - Null count 1832   
+	home_player_Y9 INTEGER, -- Example Values: `7`, `10`, `8`, `6`, `9` | Value Statics: Total count 24147 - Distinct count 6 - Null count 1832   
+	LBA REAL, -- Example Values: `(3.75,)`, `(3.5,)`, `(2.5,)` | Value Statics: Total count 22556 - Distinct count 128 - Null count 3423   
+	away_player_X4 INTEGER, -- Example Values: `6`, `8`, `2`, `7`, `5` | Value Statics: Total count 24147 - Distinct count 8 - Null count 1832   
+	match_api_id INTEGER unique, -- Example Values: `(483129,)`, `(483130,)`, `(483131,)` | Value Statics: Total count 25979 - Distinct count 25979 - Null count 0   
+	away_player_X6 INTEGER, -- Example Values: `2`, `4`, `3`, `9`, `1` | Value Statics: Total count 24147 - Distinct count 9 - Null count 1832   
+	home_player_Y3 INTEGER, -- Example Values: `3`, `5` | Value Statics: Total count 24147 - Distinct count 2 - Null count 1832   
+	away_player_X10 INTEGER, -- Example Values: `4`, `6`, `7`, `5`, `9` | Value Statics: Total count 24146 - Distinct count 9 - Null count 1833   
+	away_team_goal INTEGER, -- Example Values: `1`, `0`, `3`, `2`, `4` | Value Statics: Total count 25979 - Distinct count 10 - Null count 0   
+	home_player_X1 INTEGER, -- Example Values: `1`, `2`, `0` | Value Statics: Total count 24158 - Distinct count 3 - Null count 1821   
+	PSD REAL, -- Example Values: `(3.82,)`, `(3.52,)`, `(3.79,)` | Value Statics: Total count 11168 - Distinct count 665 - Null count 14811   
+	SJH REAL, -- Example Values: `(1.9,)`, `(1.95,)`, `(2.63,)` | Value Statics: Total count 17097 - Distinct count 137 - Null count 8882   
+	away_team_api_id INTEGER references Team (team_api_id), -- Example Values: `(9993,)`, `(9994,)`, `(8635,)` | Value Statics: Total count 25979 - Distinct count 299 - Null count 0   
+	PSA REAL, -- Example Values: `(1.76,)`, `(2.96,)`, `(4.63,)` | Value Statics: Total count 11168 - Distinct count 1475 - Null count 14811   
+	away_player_6 INTEGER references Player (player_api_id), -- Example Values: `(38798,)`, `(37202,)`, `(39145,)` | Value Statics: Total count 24666 - Distinct count 3930 - Null count 1313   
+	BWA REAL, -- Example Values: `(4.2,)`, `(3.95,)`, `(2.55,)` | Value Statics: Total count 22575 - Distinct count 261 - Null count 3404   
+	home_player_Y6 INTEGER, -- Example Values: `7`, `3`, `6`, `5`, `8` | Value Statics: Total count 24147 - Distinct count 6 - Null count 1832   
+	GBD REAL, -- Example Values: `(3.25,)`, `(3.2,)`, `(3.75,)` | Value Statics: Total count 14162 - Distinct count 84 - Null count 11817   
+	GBA REAL, -- Example Values: `(4.0,)`, `(3.75,)`, `(2.5,)` | Value Statics: Total count 14162 - Distinct count 172 - Null count 11817   
+	home_player_X6 INTEGER, -- Example Values: `2`, `6`, `4`, `1`, `3` | Value Statics: Total count 24147 - Distinct count 9 - Null count 1832   
+	home_player_X2 INTEGER, -- Example Values: `2`, `4`, `3`, `1`, `5` | Value Statics: Total count 24158 - Distinct count 9 - Null count 1821   
+	VCH REAL, -- Example Values: `(1.65,)`, `(2.0,)`, `(2.35,)` | Value Statics: Total count 22568 - Distinct count 160 - Null count 3411   
+);
+
+**************************
