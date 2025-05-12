@@ -204,7 +204,7 @@ def call_llama(
                     return_dict_in_generate=True,
                     return_legacy_cache=True,
                     temperature=0.5,
-                    past_key_values=None,
+                    past_key_values=kv_cache,
                 )
 
             # prompt 제외 output만 decode
