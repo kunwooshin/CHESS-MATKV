@@ -1,7 +1,7 @@
 from typing import Dict
 from pydantic import BaseModel
 
-from llm.models import async_llm_chain_call, get_llm_chain
+from llm.models import async_llm_chain_call, get_llm_chain, async_llama_chain_call, _init_llama_once
 from llm.prompts import get_prompt
 from llm.parsers import get_parser
 from workflow.system_state import SystemState
@@ -26,6 +26,8 @@ class GenerateCandidate(Tool):
         self.generator_configs = [self.GeneratorConfig(**config) for config in generator_configs]
         self.generators_queries = {}
         self.next_generator_to_use = "ALL"
+        _init_llama_once() ### llama 모델 
+        
 
     def _run(self, state: SystemState):
         """
@@ -54,14 +56,26 @@ class GenerateCandidate(Tool):
                     continue
             
             try:
-                response = async_llm_chain_call(
-                    prompt=get_prompt(template_name=generator_config.template_name),
-                    engine=get_llm_chain(**generator_config.engine_config),
-                    parser=get_parser(generator_config.parser_name),
-                    request_list=request_list,
-                    step=f"{self.tool_name}_{generator_config.engine_config['engine_name']}",
+                # response = async_llm_chain_call(
+                #     prompt=get_prompt(template_name=generator_config.template_name),
+                #     engine=get_llm_chain(**generator_config.engine_config),
+                #     parser=get_parser(generator_config.parser_name),
+                #     request_list=request_list,
+                #     step=f"{self.tool_name}_{generator_config.engine_config['engine_name']}",
+                # )
+                # print(response)
+                
+                response = async_llama_chain_call(
+                        prompt=get_prompt(template_name=generator_config.template_name),
+                        engine=get_llm_chain(**generator_config.engine_config),
+                        parser=get_parser(generator_config.parser_name),
+                        request_list=request_list,
+                        step=f"{self.tool_name}_{generator_config.engine_config['engine_name']}",
+                        template_name=generator_config.template_name,
                 )
+                
                 response = [res for sublist in response for res in sublist]
+                
             except Exception as e:
                 print(f"Error in generating SQL queries for generator {generator_config.template_name}: {e}")
                 continue
@@ -96,6 +110,7 @@ class GenerateCandidate(Tool):
                     "chain_of_thought_reasoning": SQL_meta_info.chain_of_thought_reasoning,
                     "SQL": SQL_meta_info.SQL
                 })
+            # print("SQL:", SQL_meta_info.SQL) #FIXME
         return {
             "node_type": self.tool_name,
             "generation_based_candidates": [{"template_name": generator_config.template_name, "candidates": [candidate.SQL for candidate in self.generators_queries[generator_config.template_name]]} for generator_config in self.generator_configs],
