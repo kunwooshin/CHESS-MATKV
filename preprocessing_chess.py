@@ -34,16 +34,18 @@ class DocumentChunk():
 class DocumentPreprocessor():
   def __init__(
       self, 
-      docs_dir: str,
-      cache_dir: str,
+      # docs_dir: str,
+      # cache_dir: str,
+      docs_dirs: List[str],
+      cache_dirs: List[str], 
       model_name: str = "meta-llama/Llama-3.1-8B", 
   ):
-    self.docs_dir = docs_dir
-    self.cache_dir = cache_dir
+    self.docs_dirs = docs_dirs
+    self.cache_dirs = cache_dirs
     #model_name = "meta-llama/Llama-2-7b-hf"
     print("Load model")
     self.tokenizer = AutoTokenizer.from_pretrained(model_name, padding_side="left")
-    self.tokenizer.padding_side = "left"
+
     self.model = AutoModelForCausalLM.from_pretrained(
       model_name, 
       torch_dtype=torch.float16,
@@ -55,24 +57,36 @@ class DocumentPreprocessor():
 
   def process_documents(self):
     start_time = time.time()
-    files = [f for f in os.listdir(self.docs_dir) if not f.startswith("cache")]
-    print(f"Processing {len(files)} documents...")
+    for docs_dir, cache_dir in zip(self.docs_dirs, self.cache_dirs):
+      files = [f for f in os.listdir(docs_dir) if not f.startswith("cache")]
+      print(f"Processing {len(files)} documents from {docs_dir}...")
 
-    for filename in tqdm(files):
-      file_path = os.path.join(self.docs_dir, filename)
-      pu_name = filename.split('.')[0]
-      print(pu_name)
-      with open(file_path, "r", encoding="utf-8") as f:
-        template = f.read()
-        self.save_kv_cache(template, pu_name) # save_kv_cache_aio
+      for filename in tqdm(files):
+          file_path = os.path.join(docs_dir, filename)
+          pu_name = filename.split('.')[0]
+          print(pu_name)
+          with open(file_path, "r", encoding="utf-8") as f:
+              template = f.read()
+              self.save_kv_cache(template, pu_name, cache_dir)
+
+    # files = [f for f in os.listdir(self.docs_dir) if not f.startswith("cache")]
+    # print(f"Processing {len(files)} documents...")
+
+    # for filename in tqdm(files):
+    #   file_path = os.path.join(self.docs_dir, filename)
+    #   pu_name = filename.split('.')[0]
+    #   print(pu_name)
+    #   with open(file_path, "r", encoding="utf-8") as f:
+    #     template = f.read()
+    #     self.save_kv_cache(template, pu_name) # save_kv_cache_aio
 
     end_time = time.time()
     elapsed_time = end_time - start_time
     
     print(f"Processing completed in {elapsed_time:.2f} seconds.")
 
-  def save_kv_cache(self, template:str, pu_name:str):
-    output_file = os.path.join(self.cache_dir, f"{pu_name}.pt")
+  def save_kv_cache(self, template:str, pu_name:str, cache_dir:str):
+    output_file = os.path.join(cache_dir, f"{pu_name}.pt")
     if pu_name in ['IR', 'CG_a', 'CG_b']:
       template = template + "\n"
       input = self.tokenizer(template, return_tensors="pt", padding_side="left").to("cuda")
@@ -81,8 +95,8 @@ class DocumentPreprocessor():
       
     with torch.no_grad():
       output = self.model(**input, use_cache = True, return_legacy_cache=True)
+
     cache = output.past_key_values
-      
     torch.save(cache, output_file)
     '''
       cache = torch.load(os.path.join(self.cache_dir, f"{chunk.id}.pt"))
@@ -90,15 +104,12 @@ class DocumentPreprocessor():
       self.model(**input, use_cache = True, past_kv_cache = past_kv_cache)
     '''
   
-  def save_kv_cache_aio(self, template: str, pu_name:str):
-    output_file = os.path.join(self.cache_dir, f"{pu_name}.pt")
+  def save_kv_cache_aio(self, template: str, pu_name:str, cache_dir:str):
+    output_file = os.path.join(cache_dir, f"{pu_name}.pt")
     input = self.tokenizer(template, return_tensors="pt", padding_side="left").to("cuda")
-    # with torch.no_grad():
-    #   output = self.model(**input, use_cache = True)
-    # cache = output.past_key_values.to_legacy_cache()
     with torch.no_grad():
-      output = self.model(**input, use_cache = True, return_legacy_cache=True)
-    cache = output.past_key_values
+      output = self.model(**input, use_cache = True)
+    cache = output.past_key_values.to_legacy_cache()
 
     cache_tensors = [t.flatten() for layer in cache for t in layer]  # 하나의 1D 텐서로 변환; .pin_memory()하려면 cpu로 보내야함?
     cache_tensor = torch.cat(cache_tensors)
@@ -109,13 +120,16 @@ class DocumentPreprocessor():
     file_write(output_file, cache_tensor, aio_handle, bounce_buffer)
   
 def main(
-  docs_dir: str,
-  cache_dir: str,
+  docs_dirs: str,
+  cache_dirs: str,
   model_name: str = "meta-llama/Llama-3.1-8B",
 ):
+  docs_dirs = docs_dirs.split(",")
+  cache_dirs = cache_dirs.split(",")
+    
   preprocessor = DocumentPreprocessor(
-    docs_dir=docs_dir,
-    cache_dir=cache_dir,
+    docs_dirs=docs_dirs,
+    cache_dirs=cache_dirs,
     model_name=model_name
   )
 
